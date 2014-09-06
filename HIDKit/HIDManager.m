@@ -7,6 +7,7 @@
 //
 
 #import "HIDManager.h"
+#import "HIDDevice.h"
 @import IOKit.hid;
 
 
@@ -93,8 +94,8 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 	NSMutableArray *devices = [NSMutableArray new];
 	for (id deviceRef in rawDevices)
 	{
-		//		DS4Device *device = [DS4Device deviceWithDeviceRef:(__bridge IOHIDDeviceRef)deviceRef];
-		//		[devices addObject:device];
+				HIDDevice *device = [[HIDDevice alloc] initWithDeviceRef:(__bridge IOHIDDeviceRef)deviceRef];
+				[devices addObject:device];
 	}
 	
 	return [devices copy];
@@ -103,6 +104,9 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 + (NSArray *)devicesMatchingDictionary:(NSDictionary *)criteria
 {
 	NSMutableArray *devices = [[[self class] devices] mutableCopy];
+	
+	// TODO: Implement me!
+	
 	return [devices copy];
 }
 
