@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1671F89F19BB4EDC00F83913 /* HIDKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1671F89E19BB4EDC00F83913 /* HIDKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1671F8A919BB4EDC00F83913 /* HIDKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671F8A819BB4EDC00F83913 /* HIDKitTests.m */; };
+		1671F8B419BB4F1300F83913 /* HIDManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1671F8B219BB4F1300F83913 /* HIDManager.h */; };
+		1671F8B519BB4F1300F83913 /* HIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671F8B319BB4F1300F83913 /* HIDManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +20,8 @@
 		1671F8A419BB4EDC00F83913 /* HIDKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HIDKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1671F8A719BB4EDC00F83913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1671F8A819BB4EDC00F83913 /* HIDKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HIDKitTests.m; sourceTree = "<group>"; };
+		1671F8B219BB4F1300F83913 /* HIDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIDManager.h; sourceTree = "<group>"; };
+		1671F8B319BB4F1300F83913 /* HIDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIDManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +65,8 @@
 			children = (
 				1671F89E19BB4EDC00F83913 /* HIDKit.h */,
 				1671F89C19BB4EDC00F83913 /* Supporting Files */,
+				1671F8B219BB4F1300F83913 /* HIDManager.h */,
+				1671F8B319BB4F1300F83913 /* HIDManager.m */,
 			);
 			path = HIDKit;
 			sourceTree = "<group>";
@@ -97,6 +103,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1671F8B419BB4F1300F83913 /* HIDManager.h in Headers */,
 				1671F89F19BB4EDC00F83913 /* HIDKit.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,6 +203,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1671F8B519BB4F1300F83913 /* HIDManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
