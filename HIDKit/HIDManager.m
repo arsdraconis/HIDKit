@@ -100,8 +100,8 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 	NSMutableArray *devices = [NSMutableArray new];
 	for (id deviceRef in rawDevices)
 	{
-				HIDDevice *device = [[HIDDevice alloc] initWithDeviceRef:(__bridge IOHIDDeviceRef)deviceRef];
-				[devices addObject:device];
+		HIDDevice *device = [[HIDDevice alloc] initWithDeviceRef:(__bridge IOHIDDeviceRef)deviceRef];
+		[devices addObject:device];
 	}
 	
 	return [devices copy];
