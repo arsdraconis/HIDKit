@@ -58,8 +58,13 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 	if (self)
 	{
 		_manager = IOHIDManagerCreate(kCFAllocatorDefault, kIOHIDOptionsTypeNone);
-		if (!_manager || CFGetTypeID(_manager) != IOHIDManagerGetTypeID())
+		if (!_manager)
 		{
+			return nil;
+		}
+		else if (CFGetTypeID(_manager) != IOHIDManagerGetTypeID())
+		{
+			CFRelease(_manager);
 			return nil;
 		}
 		
