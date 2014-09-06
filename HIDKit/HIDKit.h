@@ -17,3 +17,4 @@ FOUNDATION_EXPORT const unsigned char HIDKitVersionString[];
 // In this header, you should import all the public headers of your framework using statements like #import <HIDKit/PublicHeader.h>
 
 #import <HIDKit/HIDManager.h>
+#import <HIDKit/HIDDevice.h>
