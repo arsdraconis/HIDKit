@@ -13,6 +13,8 @@
 		1671F8B519BB4F1300F83913 /* HIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671F8B319BB4F1300F83913 /* HIDManager.m */; };
 		1671F8B819BB702100F83913 /* HIDDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 1671F8B619BB702100F83913 /* HIDDevice.h */; };
 		1671F8B919BB702100F83913 /* HIDDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671F8B719BB702100F83913 /* HIDDevice.m */; };
+		168CBAD319BC76B800E992BD /* HIDDevice+DeviceProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 168CBAD119BC76B800E992BD /* HIDDevice+DeviceProperties.h */; };
+		168CBAD419BC76B800E992BD /* HIDDevice+DeviceProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 168CBAD219BC76B800E992BD /* HIDDevice+DeviceProperties.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		1671F8B319BB4F1300F83913 /* HIDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIDManager.m; sourceTree = "<group>"; };
 		1671F8B619BB702100F83913 /* HIDDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIDDevice.h; sourceTree = "<group>"; };
 		1671F8B719BB702100F83913 /* HIDDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIDDevice.m; sourceTree = "<group>"; };
+		168CBAD119BC76B800E992BD /* HIDDevice+DeviceProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HIDDevice+DeviceProperties.h"; sourceTree = "<group>"; };
+		168CBAD219BC76B800E992BD /* HIDDevice+DeviceProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HIDDevice+DeviceProperties.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,8 @@
 				1671F8B319BB4F1300F83913 /* HIDManager.m */,
 				1671F8B619BB702100F83913 /* HIDDevice.h */,
 				1671F8B719BB702100F83913 /* HIDDevice.m */,
+				168CBAD119BC76B800E992BD /* HIDDevice+DeviceProperties.h */,
+				168CBAD219BC76B800E992BD /* HIDDevice+DeviceProperties.m */,
 			);
 			path = HIDKit;
 			sourceTree = "<group>";
@@ -112,6 +118,7 @@
 				1671F8B819BB702100F83913 /* HIDDevice.h in Headers */,
 				1671F8B419BB4F1300F83913 /* HIDManager.h in Headers */,
 				1671F89F19BB4EDC00F83913 /* HIDKit.h in Headers */,
+				168CBAD319BC76B800E992BD /* HIDDevice+DeviceProperties.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -212,6 +219,7 @@
 			files = (
 				1671F8B519BB4F1300F83913 /* HIDManager.m in Sources */,
 				1671F8B919BB702100F83913 /* HIDDevice.m in Sources */,
+				168CBAD419BC76B800E992BD /* HIDDevice+DeviceProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
