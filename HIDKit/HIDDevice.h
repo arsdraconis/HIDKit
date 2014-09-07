@@ -11,7 +11,10 @@
 
 @interface HIDDevice : NSObject
 
-@property io_service_t service;
+@property (readonly) io_service_t service;
+@property (readonly) NSArray *elements;
+- (NSArray *)elementsMatchingDictionary:(NSDictionary *)criteria;
+
 
 - (instancetype)initWithDeviceRef:(IOHIDDeviceRef)deviceRef;
 

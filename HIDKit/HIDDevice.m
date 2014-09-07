@@ -63,4 +63,27 @@
 	return IOHIDDeviceGetService(_device);
 }
 
+@dynamic elements;
+- (NSArray *)elements
+{
+	NSArray *rawElements = CFBridgingRelease(IOHIDDeviceCopyMatchingElements(_device, NULL, kIOHIDOptionsTypeNone) );
+	
+	NSMutableArray *elements = [NSMutableArray new];
+	for (id element in rawElements)
+	{
+		// TODO: Write me!
+	}
+	
+	return [elements copy];
+}
+
+- (NSArray *)elementsMatchingDictionary:(NSDictionary *)criteria
+{
+	NSMutableArray *elements = [self.elements mutableCopy];
+	
+	// TODO: Write me!
+	
+	return [elements copy];
+}
+
 @end
