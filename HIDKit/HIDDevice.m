@@ -57,5 +57,10 @@
 	}
 }
 
+@dynamic service;
+- (io_service_t)service
+{
+	return IOHIDDeviceGetService(_device);
+}
 
 @end

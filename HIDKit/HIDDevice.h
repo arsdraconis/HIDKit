@@ -11,6 +11,8 @@
 
 @interface HIDDevice : NSObject
 
+@property io_service_t service;
+
 - (instancetype)initWithDeviceRef:(IOHIDDeviceRef)deviceRef;
 
 @end
