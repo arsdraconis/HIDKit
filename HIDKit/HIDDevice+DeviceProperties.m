@@ -62,6 +62,14 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 	return result;
 }
 
+@dynamic locationID;
+- (NSUInteger)locationID
+{
+	uint32_t result;
+	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDLocationIDKey), &result);
+	return result;
+}
+
 @dynamic versionNumber;
 - (NSUInteger)versionNumber
 {

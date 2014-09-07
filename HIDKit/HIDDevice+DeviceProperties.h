@@ -15,6 +15,7 @@
 @property (readonly) NSUInteger vendorID;
 @property (readonly) NSUInteger vendorIDSource;
 @property (readonly) NSUInteger productID;
+@property (readonly) NSUInteger locationID;
 @property (readonly) NSUInteger versionNumber;
 @property (readonly) NSString *manufacturer;
 @property (readonly) NSString *product;
