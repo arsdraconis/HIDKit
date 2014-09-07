@@ -391,6 +391,7 @@
 				1671F8AE19BB4EDC00F83913 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1671F8AF19BB4EDC00F83913 /* Build configuration list for PBXNativeTarget "HIDKitTests" */ = {
 			isa = XCConfigurationList;
@@ -399,6 +400,7 @@
 				1671F8B119BB4EDC00F83913 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
