@@ -111,7 +111,7 @@
 	NSArray *rawElements = CFBridgingRelease(IOHIDDeviceCopyMatchingElements(_device, NULL, kIOHIDOptionsTypeNone) );
 	
 	NSMutableArray *elements = [NSMutableArray new];
-	for (id element in rawElements)
+	for (id elementRef in rawElements)
 	{
 		// TODO: Write me!
 	}

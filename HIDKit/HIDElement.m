@@ -66,9 +66,9 @@
 	NSArray *rawChildren = CFBridgingRelease(IOHIDElementGetChildren(_element) );
 	
 	NSMutableArray *children = [NSMutableArray array];
-	for (id rawChild in rawChildren)
+	for (id elementRef in rawChildren)
 	{
-		HIDElement *child = [[HIDElement alloc] initWithElementRef:(__bridge IOHIDElementRef)rawChild onDevice:_parentDevice parent:self];
+		HIDElement *child = [[HIDElement alloc] initWithElementRef:(__bridge IOHIDElementRef)elementRef onDevice:_parentDevice parent:self];
 		[children addObject:child];
 	}
 	
