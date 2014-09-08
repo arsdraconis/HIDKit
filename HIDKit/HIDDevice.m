@@ -17,6 +17,11 @@
 //------------------------------------------------------------------------------
 #pragma mark Creating and Destroying Instances
 //------------------------------------------------------------------------------
+- (instancetype)init
+{
+	return [self initWithDeviceRef:NULL];
+}
+
 - (instancetype)initWithDeviceRef:(IOHIDDeviceRef)deviceRef
 {
 	self = [super init];
