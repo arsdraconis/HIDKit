@@ -13,6 +13,10 @@
 // Implementation
 @implementation HIDDevice
 
+
+//------------------------------------------------------------------------------
+#pragma mark Creating and Destroying Instances
+//------------------------------------------------------------------------------
 - (instancetype)initWithDeviceRef:(IOHIDDeviceRef)deviceRef
 {
 	self = [super init];
@@ -50,12 +54,24 @@
 	}
 }
 
+//------------------------------------------------------------------------------
+#pragma mark Retrieving the I/O Service
+//------------------------------------------------------------------------------
 @dynamic service;
 - (io_service_t)service
 {
 	return IOHIDDeviceGetService(_device);
 }
 
+
+//------------------------------------------------------------------------------
+#pragma mark Interacting with Device Properties
+//------------------------------------------------------------------------------
+
+
+//------------------------------------------------------------------------------
+#pragma mark Retrieving Device Elements
+//------------------------------------------------------------------------------
 @dynamic elements;
 - (NSArray *)elements
 {
