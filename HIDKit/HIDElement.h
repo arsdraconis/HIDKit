@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HIDDevice.h"
 @import IOKit.hid;
 
 @interface HIDElement : NSObject
+
+- (instancetype)initWithElementRef:(IOHIDElementRef)element parent:(HIDDevice *)parentDevice NS_DESIGNATED_INITIALIZER;
+
+@property (readonly) HIDDevice *parentDevice;
 
 @end
