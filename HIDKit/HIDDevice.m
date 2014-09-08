@@ -67,7 +67,34 @@
 //------------------------------------------------------------------------------
 #pragma mark Interacting with Device Properties
 //------------------------------------------------------------------------------
+- (NSString *)getStringProperty:(CFStringRef)key
+{
+	return (NSString *)CFBridgingRelease(IOHIDDeviceGetProperty(_device,  key));
+}
 
+- (BOOL)getUInt32Property:(uint32_t *)outValue forKey:(CFStringRef)key
+{
+	BOOL result = NO;
+	
+	CFTypeRef value = IOHIDDeviceGetProperty(_device, key);
+	if (value && CFNumberGetTypeID() == CFGetTypeID(value) )
+	{
+		result = (BOOL)CFNumberGetValue( (CFNumberRef)value, kCFNumberSInt32Type, outValue);
+	}
+	
+	return result;
+}
+
+- (void)setUInt32Property:(CFStringRef)key value:(uint32_t)value
+{
+	CFNumberRef numberRef = CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &value);
+	
+	if (numberRef)
+	{
+		IOHIDDeviceSetProperty(_device, key, numberRef);
+		CFRelease(numberRef);
+	}
+}
 
 //------------------------------------------------------------------------------
 #pragma mark Retrieving Device Elements
