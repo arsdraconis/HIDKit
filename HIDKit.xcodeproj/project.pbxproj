@@ -7,19 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		161661D919BD9ADB006C7696 /* HIDElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 161661D719BD9ADB006C7696 /* HIDElement.h */; };
+		161661D919BD9ADB006C7696 /* HIDElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 161661D719BD9ADB006C7696 /* HIDElement.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		161661DA19BD9ADB006C7696 /* HIDElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 161661D819BD9ADB006C7696 /* HIDElement.m */; };
 		161661DD19BD9B4C006C7696 /* HIDDevice+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 161661DB19BD9B4C006C7696 /* HIDDevice+Private.h */; };
-		16673A9919BDB04D0065B330 /* HIDElement+ElementProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 16673A9719BDB04D0065B330 /* HIDElement+ElementProperties.h */; };
+		16673A9919BDB04D0065B330 /* HIDElement+ElementProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 16673A9719BDB04D0065B330 /* HIDElement+ElementProperties.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		16673A9A19BDB04D0065B330 /* HIDElement+ElementProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 16673A9819BDB04D0065B330 /* HIDElement+ElementProperties.m */; };
 		16673A9D19BDB44C0065B330 /* HIDElement+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 16673A9B19BDB44C0065B330 /* HIDElement+Private.h */; };
 		1671F89F19BB4EDC00F83913 /* HIDKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1671F89E19BB4EDC00F83913 /* HIDKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1671F8A919BB4EDC00F83913 /* HIDKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671F8A819BB4EDC00F83913 /* HIDKitTests.m */; };
-		1671F8B419BB4F1300F83913 /* HIDManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1671F8B219BB4F1300F83913 /* HIDManager.h */; };
+		1671F8B419BB4F1300F83913 /* HIDManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1671F8B219BB4F1300F83913 /* HIDManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1671F8B519BB4F1300F83913 /* HIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671F8B319BB4F1300F83913 /* HIDManager.m */; };
-		1671F8B819BB702100F83913 /* HIDDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 1671F8B619BB702100F83913 /* HIDDevice.h */; };
+		1671F8B819BB702100F83913 /* HIDDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = 1671F8B619BB702100F83913 /* HIDDevice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1671F8B919BB702100F83913 /* HIDDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671F8B719BB702100F83913 /* HIDDevice.m */; };
-		168CBAD319BC76B800E992BD /* HIDDevice+DeviceProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 168CBAD119BC76B800E992BD /* HIDDevice+DeviceProperties.h */; };
+		168CBAD319BC76B800E992BD /* HIDDevice+DeviceProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 168CBAD119BC76B800E992BD /* HIDDevice+DeviceProperties.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		168CBAD419BC76B800E992BD /* HIDDevice+DeviceProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 168CBAD219BC76B800E992BD /* HIDDevice+DeviceProperties.m */; };
 /* End PBXBuildFile section */
 
@@ -136,10 +136,10 @@
 				161661D919BD9ADB006C7696 /* HIDElement.h in Headers */,
 				1671F8B819BB702100F83913 /* HIDDevice.h in Headers */,
 				1671F8B419BB4F1300F83913 /* HIDManager.h in Headers */,
-				16673A9919BDB04D0065B330 /* HIDElement+ElementProperties.h in Headers */,
 				1671F89F19BB4EDC00F83913 /* HIDKit.h in Headers */,
-				161661DD19BD9B4C006C7696 /* HIDDevice+Private.h in Headers */,
+				16673A9919BDB04D0065B330 /* HIDElement+ElementProperties.h in Headers */,
 				168CBAD319BC76B800E992BD /* HIDDevice+DeviceProperties.h in Headers */,
+				161661DD19BD9B4C006C7696 /* HIDDevice+Private.h in Headers */,
 				16673A9D19BDB44C0065B330 /* HIDElement+Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -348,7 +348,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = HIDKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -365,7 +365,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = HIDKit/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				INSTALL_PATH = "@executable_path/../Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
