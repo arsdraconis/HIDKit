@@ -12,8 +12,12 @@
 
 @interface HIDElement : NSObject
 
-- (instancetype)initWithElementRef:(IOHIDElementRef)element parent:(HIDDevice *)parentDevice NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithElementRef:(IOHIDElementRef)element onDevice:(HIDDevice *)device parent:(HIDElement *)parentElement NS_DESIGNATED_INITIALIZER;
 
 @property (readonly) HIDDevice *parentDevice;
+@property (readonly) HIDElement *parent;
+@property (readonly) NSArray *children;
+
+@property (readonly) IOHIDElementType type;
 
 @end

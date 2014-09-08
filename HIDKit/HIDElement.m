@@ -21,23 +21,24 @@
 //------------------------------------------------------------------------------
 - (instancetype)init
 {
-	return [self initWithElementRef:NULL parent:nil];
+	return [self initWithElementRef:NULL onDevice:nil parent:nil];
 }
 
-- (instancetype)initWithElementRef:(IOHIDElementRef)element parent:(HIDDevice *)parentDevice
+- (instancetype)initWithElementRef:(IOHIDElementRef)element onDevice:(HIDDevice *)device parent:(HIDElement *)parentElement
 {
 	self = [super init];
 	if (self)
 	{
 		NSParameterAssert(element);
-		NSParameterAssert(parentDevice);
 		if (CFGetTypeID(element) != IOHIDElementGetTypeID() )
 		{
 			return nil;
 		}
 		
+		CFRetain(element);
 		_element = element;
-		_parentDevice = parentDevice;
+		_parentDevice = device;
+		_parent = parentElement;
 	}
 	return self;
 }
@@ -48,6 +49,30 @@
 	{
 		CFRelease(_element);
 	}
+}
+
+//------------------------------------------------------------------------------
+#pragma mark Element Properties
+//------------------------------------------------------------------------------
+@dynamic type;
+- (IOHIDElementType)type
+{
+	return IOHIDElementGetType(_element);
+}
+
+@dynamic children;
+- (NSArray *)children
+{
+	NSArray *rawChildren = CFBridgingRelease(IOHIDElementGetChildren(_element) );
+	
+	NSMutableArray *children = [NSMutableArray array];
+	for (id rawChild in rawChildren)
+	{
+		HIDElement *child = [[HIDElement alloc] initWithElementRef:(__bridge IOHIDElementRef)rawChild onDevice:_parentDevice parent:self];
+		[children addObject:child];
+	}
+	
+	return [children copy];
 }
 
 @end
