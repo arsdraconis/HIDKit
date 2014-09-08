@@ -33,6 +33,7 @@
 			return nil;
 		}
 		
+		CFRetain(deviceRef);
 		_device = deviceRef;
 		
 //		IOHIDDeviceRegisterInputValueCallback(_device, &DS4DeviceInputValueCallback, (__bridge void *)self);
