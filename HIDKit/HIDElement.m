@@ -7,12 +7,7 @@
 //
 
 #import "HIDElement.h"
-
-@interface HIDElement ()
-
-@property (readonly) IOHIDElementRef element;
-
-@end
+#import "HIDElement+Private.h"
 
 @implementation HIDElement
 

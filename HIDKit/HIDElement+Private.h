@@ -8,6 +8,9 @@
 
 #import "HIDElement.h"
 
+
 @interface HIDElement ()
+
+@property (readonly) IOHIDElementRef element;
 
 @end
