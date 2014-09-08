@@ -8,7 +8,7 @@
 
 #import "HIDDevice.h"
 #import "HIDDevice+Private.h"
-
+#import "HIDElement.h"
 
 // Implementation
 @implementation HIDDevice
@@ -113,7 +113,8 @@
 	NSMutableArray *elements = [NSMutableArray new];
 	for (id elementRef in rawElements)
 	{
-		// TODO: Write me!
+		HIDElement *element = [[HIDElement alloc] initWithElementRef:(__bridge IOHIDElementRef)(elementRef) onDevice:self parent:nil];
+		[elements addObject:element];
 	}
 	
 	return [elements copy];
