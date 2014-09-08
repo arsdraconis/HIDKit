@@ -10,30 +10,19 @@
 #import "HIDDevice+Private.h"
 
 
-//------------------------------------------------------------------------------
-#pragma mark Function Prototypes
-//------------------------------------------------------------------------------
-static BOOL HIDDevice_GetUInt32Property(IOHIDDeviceRef device, CFStringRef key, uint32_t * outValue);
-static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, uint32_t value);
-
-
-//------------------------------------------------------------------------------
-#pragma mark Category Implementation
-//------------------------------------------------------------------------------
-
 @implementation HIDDevice (DeviceProperties)
 
 @dynamic transport;
 - (NSString *)transport
 {
-	return (NSString *)CFBridgingRelease(IOHIDDeviceGetProperty(self.device, CFSTR(kIOHIDTransportKey) ) );
+	return [self getStringProperty:CFSTR(kIOHIDTransportKey)];
 }
 
 @dynamic vendorID;
 - (NSUInteger)vendorID
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDVendorIDKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDVendorIDKey)];
 	return result;
 }
 
@@ -41,7 +30,7 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)vendorIDSource
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDVendorIDSourceKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDVendorIDSourceKey)];
 	return result;
 }
 
@@ -49,7 +38,7 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)productID
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDProductIDKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDProductIDKey)];
 	return result;
 }
 
@@ -57,7 +46,7 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)locationID
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDLocationIDKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDLocationIDKey)];
 	return result;
 }
 
@@ -65,33 +54,33 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)versionNumber
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDVersionNumberKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDVersionNumberKey)];
 	return result;
 }
 
 @dynamic manufacturer;
 - (NSString *)manufacturer
 {
-	return (NSString *)CFBridgingRelease(IOHIDDeviceGetProperty(self.device, CFSTR(kIOHIDManufacturerKey) ) );
+	return [self getStringProperty:CFSTR(kIOHIDManufacturerKey)];
 }
 
 @dynamic product;
 - (NSString *)product
 {
-	return (NSString *)CFBridgingRelease(IOHIDDeviceGetProperty(self.device, CFSTR(kIOHIDProductKey) ) );
+	return [self getStringProperty:CFSTR(kIOHIDProductKey)];
 }
 
 @dynamic serialNumber;
 - (NSString *)serialNumber
 {
-	return (NSString *)CFBridgingRelease(IOHIDDeviceGetProperty(self.device, CFSTR(kIOHIDSerialNumberKey) ) );
+	return [self getStringProperty:CFSTR(kIOHIDSerialNumberKey)];
 }
 
 @dynamic countryCode;
 - (NSUInteger)countryCode
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDCountryCodeKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDCountryCodeKey)];
 	return result;
 }
 
@@ -99,7 +88,7 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)deviceUsage
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDDeviceUsageKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDDeviceUsageKey)];
 	return result;
 }
 
@@ -107,7 +96,7 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)deviceUsagePage
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDDeviceUsagePageKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDDeviceUsagePageKey)];
 	return result;
 }
 
@@ -123,7 +112,7 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)primaryUsage
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDPrimaryUsageKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDPrimaryUsageKey)];
 	return result;
 }
 
@@ -131,7 +120,7 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)primaryUsagePage
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDPrimaryUsagePageKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDPrimaryUsagePageKey)];
 	return result;
 }
 
@@ -139,7 +128,7 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)maxInputReportSize
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDMaxInputReportSizeKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDMaxInputReportSizeKey)];
 	return result;
 }
 
@@ -147,7 +136,7 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)maxOutputReportSize
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDMaxOutputReportSizeKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDMaxOutputReportSizeKey)];
 	return result;
 }
 
@@ -155,7 +144,7 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)maxFeatureReportSize
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDMaxFeatureReportSizeKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDMaxFeatureReportSizeKey)];
 	return result;
 }
 
@@ -163,7 +152,7 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)maxResponseLatency
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDMaxResponseLatencyKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDMaxResponseLatencyKey)];
 	return result;
 }
 
@@ -171,7 +160,7 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)reportInterval
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDReportIntervalKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDReportIntervalKey)];
 	return result;
 }
 
@@ -179,7 +168,7 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)sampleInterval
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDSampleIntervalKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDSampleIntervalKey)];
 	return result;
 }
 
@@ -187,52 +176,9 @@ static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, 
 - (NSUInteger)requestTimeout
 {
 	uint32_t result;
-	HIDDevice_GetUInt32Property(self.device, CFSTR(kIOHIDRequestTimeoutKey), &result);
+	[self getUInt32Property:&result forKey:CFSTR(kIOHIDRequestTimeoutKey)];
 	return result;
 }
-
 
 
 @end
-
-
-
-//------------------------------------------------------------------------------
-#pragma mark Convenience Functions
-//------------------------------------------------------------------------------
-// These are simple convenience functions to get/set UInt32 properties on an HID
-// device. They were rewritten from Apple's HID Dumper sample project.
-
-
-static BOOL HIDDevice_GetUInt32Property(IOHIDDeviceRef device, CFStringRef key, uint32_t * outValue)
-{
-	Boolean result = NO;
-	
-	if (device)
-	{
-		assert(IOHIDDeviceGetTypeID() == CFGetTypeID(device) );
-		
-		CFTypeRef tCFTypeRef = IOHIDDeviceGetProperty(device, key);
-		if (tCFTypeRef)
-		{
-			if (CFNumberGetTypeID() == CFGetTypeID(tCFTypeRef) )
-			{
-				result = CFNumberGetValue( (CFNumberRef)tCFTypeRef, kCFNumberSInt32Type, outValue);
-			}
-		}
-	}
-	
-	return result;
-}
-
-static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, uint32_t value)
-{
-	CFNumberRef numberRef = CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &value);
-	
-	if (numberRef)
-	{
-		IOHIDDeviceSetProperty(device, key, numberRef);
-		CFRelease(numberRef);
-	}
-}
-
