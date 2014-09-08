@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		161661D919BD9ADB006C7696 /* HIDElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 161661D719BD9ADB006C7696 /* HIDElement.h */; };
+		161661DA19BD9ADB006C7696 /* HIDElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 161661D819BD9ADB006C7696 /* HIDElement.m */; };
 		1671F89F19BB4EDC00F83913 /* HIDKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1671F89E19BB4EDC00F83913 /* HIDKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1671F8A919BB4EDC00F83913 /* HIDKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671F8A819BB4EDC00F83913 /* HIDKitTests.m */; };
 		1671F8B419BB4F1300F83913 /* HIDManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1671F8B219BB4F1300F83913 /* HIDManager.h */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		161661D719BD9ADB006C7696 /* HIDElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIDElement.h; sourceTree = "<group>"; };
+		161661D819BD9ADB006C7696 /* HIDElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIDElement.m; sourceTree = "<group>"; };
 		1671F89919BB4EDC00F83913 /* HIDKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HIDKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1671F89D19BB4EDC00F83913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1671F89E19BB4EDC00F83913 /* HIDKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HIDKit.h; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 				1671F8B719BB702100F83913 /* HIDDevice.m */,
 				168CBAD119BC76B800E992BD /* HIDDevice+DeviceProperties.h */,
 				168CBAD219BC76B800E992BD /* HIDDevice+DeviceProperties.m */,
+				161661D719BD9ADB006C7696 /* HIDElement.h */,
+				161661D819BD9ADB006C7696 /* HIDElement.m */,
 			);
 			path = HIDKit;
 			sourceTree = "<group>";
@@ -115,6 +121,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				161661D919BD9ADB006C7696 /* HIDElement.h in Headers */,
 				1671F8B819BB702100F83913 /* HIDDevice.h in Headers */,
 				1671F8B419BB4F1300F83913 /* HIDManager.h in Headers */,
 				1671F89F19BB4EDC00F83913 /* HIDKit.h in Headers */,
@@ -219,6 +226,7 @@
 			files = (
 				1671F8B519BB4F1300F83913 /* HIDManager.m in Sources */,
 				1671F8B919BB702100F83913 /* HIDDevice.m in Sources */,
+				161661DA19BD9ADB006C7696 /* HIDElement.m in Sources */,
 				168CBAD419BC76B800E992BD /* HIDDevice+DeviceProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
