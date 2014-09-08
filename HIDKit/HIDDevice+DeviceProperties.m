@@ -7,6 +7,7 @@
 //
 
 #import "HIDDevice+DeviceProperties.h"
+#import "HIDDevice+Private.h"
 
 
 //------------------------------------------------------------------------------
@@ -14,16 +15,6 @@
 //------------------------------------------------------------------------------
 static BOOL HIDDevice_GetUInt32Property(IOHIDDeviceRef device, CFStringRef key, uint32_t * outValue);
 static void HIDDevice_SetUInt32Property(IOHIDDeviceRef device, CFStringRef key, uint32_t value);
-
-
-// Private Class Extension
-// This should really be in a private header somewhere.
-@interface HIDDevice ()
-
-@property IOHIDDeviceRef device;
-
-@end
-
 
 
 //------------------------------------------------------------------------------

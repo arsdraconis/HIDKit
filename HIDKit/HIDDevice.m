@@ -7,14 +7,7 @@
 //
 
 #import "HIDDevice.h"
-
-
-// Private Class Extension
-@interface HIDDevice ()
-
-@property IOHIDDeviceRef device;
-
-@end
+#import "HIDDevice+Private.h"
 
 
 // Implementation
