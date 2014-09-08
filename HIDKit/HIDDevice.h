@@ -24,7 +24,7 @@
  
 	@returns An initialized HIDDevice object.
  */
-- (instancetype)initWithDeviceRef:(IOHIDDeviceRef)deviceRef;
+- (instancetype)initWithDeviceRef:(IOHIDDeviceRef)deviceRef NS_DESIGNATED_INITIALIZER;
 
 /// Allows access to the device's io_service_t service.
 @property (readonly) io_service_t service;
