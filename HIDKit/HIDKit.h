@@ -19,3 +19,5 @@ FOUNDATION_EXPORT const unsigned char HIDKitVersionString[];
 #import <HIDKit/HIDManager.h>
 #import <HIDKit/HIDDevice.h>
 #import <HIDKit/HIDDevice+DeviceProperties.h>
+#import <HIDKit/HIDElement.h>
+#import <HIDKit/HIDElement+ElementProperties.h>
