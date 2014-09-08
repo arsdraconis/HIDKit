@@ -11,12 +11,18 @@
 @import IOKit.hid;
 
 
-// Notifications
+
+//------------------------------------------------------------------------------
+#pragma mark Notification Keys
+//------------------------------------------------------------------------------
 NSString * const HIDManagerDeviceConnectedNotification = @"HIDManagerDeviceConnected";
 NSString * const HIDManagerDeviceRemovedNotification = @"HIDManagerDeviceRemoved";
 
 
-// Device Callbacks
+
+//------------------------------------------------------------------------------
+#pragma mark Device Callback Functions
+//------------------------------------------------------------------------------
 static void HIDManagerDeviceMatchCallback(void * context, IOReturn result, void * sender, IOHIDDeviceRef device)
 {
 	[[NSNotificationCenter defaultCenter] postNotificationName:HIDManagerDeviceConnectedNotification object:(__bridge id)context];
@@ -28,7 +34,10 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 }
 
 
-// Class Extension
+
+//------------------------------------------------------------------------------
+#pragma mark Private Class Extension
+//------------------------------------------------------------------------------
 @interface HIDManager ()
 
 @property IOHIDManagerRef manager;
@@ -36,9 +45,15 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 @end
 
 
-// Implementation
+
+//------------------------------------------------------------------------------
+#pragma mark Implementation
+//------------------------------------------------------------------------------
 @implementation HIDManager
 
+//------------------------------------------------------------------------------
+#pragma mark Retrieving the Shared Manager
+//------------------------------------------------------------------------------
 + (instancetype)sharedManager
 {
 	static HIDManager *sharedInstance;
@@ -52,6 +67,10 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 
 }
 
+
+//------------------------------------------------------------------------------
+#pragma mark Creation and Destruction
+//------------------------------------------------------------------------------
 - (instancetype)init
 {
 	self = [super init];
@@ -93,6 +112,10 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 	}
 }
 
+
+//------------------------------------------------------------------------------
+#pragma mark Retrieving Devices
+//------------------------------------------------------------------------------
 + (NSArray *)devices
 {
 	// FIXME: Crashes here when you reset the controller via the reset button.
@@ -116,15 +139,6 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 	
 	return [devices copy];
 }
-
-//- (void)setDeviceMatchingCriteria:(IOHIDManagerRef)manager
-//{
-//	NSMutableDictionary *matchingDict = [[NSMutableDictionary alloc] init];
-//	matchingDict[@kIOHIDProductKey] = @"Wireless Controller";
-//	matchingDict[@kIOHIDManufacturerKey] = @"Sony Computer Entertainment";
-//
-//	IOHIDManagerSetDeviceMatching(manager, (__bridge CFDictionaryRef)matchingDict);
-//}
 
 
 @end
