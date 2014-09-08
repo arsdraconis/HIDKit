@@ -12,6 +12,7 @@
 		161661DD19BD9B4C006C7696 /* HIDDevice+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 161661DB19BD9B4C006C7696 /* HIDDevice+Private.h */; };
 		16673A9919BDB04D0065B330 /* HIDElement+ElementProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 16673A9719BDB04D0065B330 /* HIDElement+ElementProperties.h */; };
 		16673A9A19BDB04D0065B330 /* HIDElement+ElementProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 16673A9819BDB04D0065B330 /* HIDElement+ElementProperties.m */; };
+		16673A9D19BDB44C0065B330 /* HIDElement+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 16673A9B19BDB44C0065B330 /* HIDElement+Private.h */; };
 		1671F89F19BB4EDC00F83913 /* HIDKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1671F89E19BB4EDC00F83913 /* HIDKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1671F8A919BB4EDC00F83913 /* HIDKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671F8A819BB4EDC00F83913 /* HIDKitTests.m */; };
 		1671F8B419BB4F1300F83913 /* HIDManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 1671F8B219BB4F1300F83913 /* HIDManager.h */; };
@@ -28,6 +29,7 @@
 		161661DB19BD9B4C006C7696 /* HIDDevice+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HIDDevice+Private.h"; sourceTree = "<group>"; };
 		16673A9719BDB04D0065B330 /* HIDElement+ElementProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HIDElement+ElementProperties.h"; sourceTree = "<group>"; };
 		16673A9819BDB04D0065B330 /* HIDElement+ElementProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HIDElement+ElementProperties.m"; sourceTree = "<group>"; };
+		16673A9B19BDB44C0065B330 /* HIDElement+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HIDElement+Private.h"; sourceTree = "<group>"; };
 		1671F89919BB4EDC00F83913 /* HIDKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HIDKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1671F89D19BB4EDC00F83913 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1671F89E19BB4EDC00F83913 /* HIDKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HIDKit.h; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				168CBAD119BC76B800E992BD /* HIDDevice+DeviceProperties.h */,
 				168CBAD219BC76B800E992BD /* HIDDevice+DeviceProperties.m */,
 				161661D719BD9ADB006C7696 /* HIDElement.h */,
+				16673A9B19BDB44C0065B330 /* HIDElement+Private.h */,
 				161661D819BD9ADB006C7696 /* HIDElement.m */,
 				16673A9719BDB04D0065B330 /* HIDElement+ElementProperties.h */,
 				16673A9819BDB04D0065B330 /* HIDElement+ElementProperties.m */,
@@ -137,6 +140,7 @@
 				1671F89F19BB4EDC00F83913 /* HIDKit.h in Headers */,
 				161661DD19BD9B4C006C7696 /* HIDDevice+Private.h in Headers */,
 				168CBAD319BC76B800E992BD /* HIDDevice+DeviceProperties.h in Headers */,
+				16673A9D19BDB44C0065B330 /* HIDElement+Private.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
