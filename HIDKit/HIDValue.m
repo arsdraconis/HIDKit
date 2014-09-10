@@ -7,14 +7,10 @@
 //
 
 #import "HIDValue.h"
+#import "HIDValue+Private.h"
 #import "HIDElement+Private.h"
 @import IOKit.hid;
 
-@interface HIDValue ()
-
-@property (readonly) IOHIDValueRef value;
-
-@end
 
 @implementation HIDValue
 

@@ -8,6 +8,10 @@
 
 #import "HIDValue.h"
 
-@interface HIDValue (Private)
+@interface HIDValue ()
+
+@property (readonly) IOHIDValueRef value;
+
+- (instancetype)initWithValue:(IOHIDValueRef)value;
 
 @end
