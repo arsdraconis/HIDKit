@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HIDDevice.h"
 @import IOKit.hid;
+
+@class HIDDevice;
 
 @interface HIDElement : NSObject
 
