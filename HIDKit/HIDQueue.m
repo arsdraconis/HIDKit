@@ -55,7 +55,7 @@
 			return nil;
 		}
 		
-		// TODO: Register the callback and implement a blocks-based handler API.
+		// TODO: Register the callback and implement an async blocks-based handler API.
 		
 		IOHIDQueueScheduleWithRunLoop(_queue, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 	}
