@@ -12,6 +12,7 @@
 #import "HIDElement+Private.h"
 @import IOKit.hid;
 
+
 //------------------------------------------------------------------------------
 #pragma mark Class Extension
 //------------------------------------------------------------------------------
@@ -27,11 +28,11 @@
 //------------------------------------------------------------------------------
 void HIDTransactionCallback(void *context, IOReturn result, void *sender);
 
+
 //------------------------------------------------------------------------------
 #pragma mark Implementation
 //------------------------------------------------------------------------------
 @implementation HIDTransaction
-
 
 //------------------------------------------------------------------------------
 #pragma mark Creation and Destruction
@@ -76,6 +77,7 @@ void HIDTransactionCallback(void *context, IOReturn result, void *sender);
 	}
 }
 
+
 //------------------------------------------------------------------------------
 #pragma mark Transaction Properties
 //------------------------------------------------------------------------------
@@ -96,6 +98,8 @@ void HIDTransactionCallback(void *context, IOReturn result, void *sender);
 //------------------------------------------------------------------------------
 #pragma mark Managing Elements
 //------------------------------------------------------------------------------
+// TODO: This could be better expressed with an array property of attached elements.
+// We could hook into object addition/removal to do this.
 - (void)addElement:(HIDElement *)element
 {
 	IOHIDTransactionAddElement(_transaction, element.element);
@@ -110,6 +114,7 @@ void HIDTransactionCallback(void *context, IOReturn result, void *sender);
 {
 	return (BOOL)IOHIDTransactionContainsElement(_transaction, element.element);
 }
+
 
 //------------------------------------------------------------------------------
 #pragma mark Committing and Clearing Values
