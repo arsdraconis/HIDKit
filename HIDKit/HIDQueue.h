@@ -101,6 +101,8 @@
 /// specifying an appropriate depth to prevent dropping events.
 @property NSUInteger depth;
 
+/// The device associated with the queue.
+@property HIDDevice *device;
 
 
 @end
