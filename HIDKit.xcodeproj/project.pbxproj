@@ -11,6 +11,8 @@
 		161661DA19BD9ADB006C7696 /* HIDElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 161661D819BD9ADB006C7696 /* HIDElement.m */; };
 		161661DD19BD9B4C006C7696 /* HIDDevice+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 161661DB19BD9B4C006C7696 /* HIDDevice+Private.h */; };
 		16250FDA19C06370006D620D /* HIDValue+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 16250FD819C06370006D620D /* HIDValue+Private.h */; };
+		16250FDE19C0666F006D620D /* HIDTransaction.h in Headers */ = {isa = PBXBuildFile; fileRef = 16250FDC19C0666F006D620D /* HIDTransaction.h */; };
+		16250FDF19C0666F006D620D /* HIDTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 16250FDD19C0666F006D620D /* HIDTransaction.m */; };
 		16673A9919BDB04D0065B330 /* HIDElement+ElementProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 16673A9719BDB04D0065B330 /* HIDElement+ElementProperties.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		16673A9A19BDB04D0065B330 /* HIDElement+ElementProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 16673A9819BDB04D0065B330 /* HIDElement+ElementProperties.m */; };
 		16673A9D19BDB44C0065B330 /* HIDElement+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 16673A9B19BDB44C0065B330 /* HIDElement+Private.h */; };
@@ -33,6 +35,8 @@
 		161661D819BD9ADB006C7696 /* HIDElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIDElement.m; sourceTree = "<group>"; };
 		161661DB19BD9B4C006C7696 /* HIDDevice+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HIDDevice+Private.h"; sourceTree = "<group>"; };
 		16250FD819C06370006D620D /* HIDValue+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HIDValue+Private.h"; sourceTree = "<group>"; };
+		16250FDC19C0666F006D620D /* HIDTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIDTransaction.h; sourceTree = "<group>"; };
+		16250FDD19C0666F006D620D /* HIDTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIDTransaction.m; sourceTree = "<group>"; };
 		16673A9719BDB04D0065B330 /* HIDElement+ElementProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HIDElement+ElementProperties.h"; sourceTree = "<group>"; };
 		16673A9819BDB04D0065B330 /* HIDElement+ElementProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HIDElement+ElementProperties.m"; sourceTree = "<group>"; };
 		16673A9B19BDB44C0065B330 /* HIDElement+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HIDElement+Private.h"; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 				16673AA019BDC01D0065B330 /* HIDValue.m */,
 				1671454319C05AFF008881D3 /* HIDQueue.h */,
 				1671454419C05AFF008881D3 /* HIDQueue.m */,
+				16250FDC19C0666F006D620D /* HIDTransaction.h */,
+				16250FDD19C0666F006D620D /* HIDTransaction.m */,
 			);
 			path = HIDKit;
 			sourceTree = "<group>";
@@ -157,6 +163,7 @@
 				168CBAD319BC76B800E992BD /* HIDDevice+DeviceProperties.h in Headers */,
 				1671454519C05AFF008881D3 /* HIDQueue.h in Headers */,
 				161661DD19BD9B4C006C7696 /* HIDDevice+Private.h in Headers */,
+				16250FDE19C0666F006D620D /* HIDTransaction.h in Headers */,
 				16673A9D19BDB44C0065B330 /* HIDElement+Private.h in Headers */,
 				16673AA119BDC01D0065B330 /* HIDValue.h in Headers */,
 			);
@@ -263,6 +270,7 @@
 				161661DA19BD9ADB006C7696 /* HIDElement.m in Sources */,
 				16673AA219BDC01D0065B330 /* HIDValue.m in Sources */,
 				168CBAD419BC76B800E992BD /* HIDDevice+DeviceProperties.m in Sources */,
+				16250FDF19C0666F006D620D /* HIDTransaction.m in Sources */,
 				16673A9A19BDB04D0065B330 /* HIDElement+ElementProperties.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
