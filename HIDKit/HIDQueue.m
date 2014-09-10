@@ -91,16 +91,30 @@
 //------------------------------------------------------------------------------
 - (HIDValue *)nextValue
 {
-	// TODO: Implement me!
-	NSLog(@"Method unimplemented: %s in %s, line %d.", __PRETTY_FUNCTION__, __FILE__, __LINE__);
-	return nil;
+	IOHIDValueRef value = IOHIDQueueCopyNextValue(_queue);
+	HIDValue *returnValue = nil;
+	
+	if (value)
+	{
+		returnValue = [[HIDValue alloc] initWithValue:value];
+		CFRelease(value);
+	}
+	
+	return returnValue;
 }
 
 - (HIDValue *)nextValueWithTimeout:(CFTimeInterval)timeout
 {
-	// TODO: Implement me!
-	NSLog(@"Method unimplemented: %s in %s, line %d.", __PRETTY_FUNCTION__, __FILE__, __LINE__);
-	return nil;
+	IOHIDValueRef value = IOHIDQueueCopyNextValueWithTimeout(_queue, timeout);
+	HIDValue *returnValue = nil;
+	
+	if (value)
+	{
+		returnValue = [[HIDValue alloc] initWithValue:value];
+		CFRelease(value);
+	}
+	
+	return returnValue;
 }
 
 //------------------------------------------------------------------------------
