@@ -81,6 +81,23 @@
 	return self;
 }
 
+- (instancetype)initWithValue:(IOHIDValueRef)value
+{
+	self = [super init];
+	if (self)
+	{
+		NSParameterAssert(value);
+		
+		_value = value;
+		
+		if (CFGetTypeID(value) != IOHIDValueGetTypeID() )
+		{
+			return nil;
+		}
+	}
+	return self;
+}
+
 - (void)dealloc
 {
 	if (_value)
