@@ -27,7 +27,7 @@
 - (instancetype)initWithElementRef:(IOHIDElementRef)element onDevice:(HIDDevice *)device parent:(HIDElement *)parentElement NS_DESIGNATED_INITIALIZER;
 
 /// The device to which this element belongs to.
-@property (readonly) HIDDevice *parentDevice;
+@property (readonly) HIDDevice *device;
 /// The parent element of this element.
 @property (readonly) HIDElement *parent;
 /// The children elements of this element. If none, this returns an empty array.

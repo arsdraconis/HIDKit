@@ -32,7 +32,7 @@
 		
 		CFRetain(element);
 		_element = element;
-		_parentDevice = device;
+		_device = device;
 		_parent = parentElement;
 	}
 	return self;
@@ -63,7 +63,7 @@
 	NSMutableArray *children = [NSMutableArray array];
 	for (id elementRef in rawChildren)
 	{
-		HIDElement *child = [[HIDElement alloc] initWithElementRef:(__bridge IOHIDElementRef)elementRef onDevice:_parentDevice parent:self];
+		HIDElement *child = [[HIDElement alloc] initWithElementRef:(__bridge IOHIDElementRef)elementRef onDevice:_device parent:self];
 		[children addObject:child];
 	}
 	
