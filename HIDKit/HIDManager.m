@@ -119,15 +119,22 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 //------------------------------------------------------------------------------
 + (NSArray *)devices
 {
-	// FIXME: Crashes here when you reset the controller via the reset button.
-	NSSet *rawDevices = (NSSet *)CFBridgingRelease(IOHIDManagerCopyDevices([HIDManager sharedManager].manager));
+	CFSetRef rawDevices = IOHIDManagerCopyDevices([HIDManager sharedManager].manager);
+	CFIndex deviceCount = CFSetGetCount(rawDevices);
+	
+	IOHIDDeviceRef *deviceArray = calloc(deviceCount, sizeof(IOHIDDeviceRef));
+	CFSetGetValues(rawDevices, (const void **)deviceArray);
 	
 	NSMutableArray *devices = [NSMutableArray array];
-	for (id deviceRef in rawDevices)
+	for (int i = 0; i < deviceCount; i++)
 	{
-		HIDDevice *device = [[HIDDevice alloc] initWithDeviceRef:(__bridge IOHIDDeviceRef)deviceRef];
+		HIDDevice *device = [[HIDDevice alloc] initWithDeviceRef:deviceArray[i]];
 		[devices addObject:device];
 	}
+	
+	CFRelease(rawDevices);
+	free(deviceArray);
+	deviceArray = NULL;
 	
 	return [devices copy];
 }
