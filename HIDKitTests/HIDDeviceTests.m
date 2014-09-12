@@ -60,8 +60,6 @@
 	// Note the retain count.
 	CFRetain(_testDevice);
 	_testDeviceRetainCount = CFGetRetainCount(_testDevice);
-	
-	NSLog(@"Test device retain count after setUp: %ld", CFGetRetainCount(_testDevice));
 }
 
 - (void)tearDown {
@@ -69,10 +67,12 @@
     [super tearDown];
 	
 	// Release test device and manager.
-	NSLog(@"Test device retain count before tearDown: %ld", CFGetRetainCount(_testDevice));
 	CFRelease(_testDevice);
+	_testDevice = NULL;
+	
 	IOHIDManagerClose(_manager, kIOHIDOptionsTypeNone);
 	CFRelease(_manager);
+	_manager = NULL;
 }
 
 - (void)testRetainCount
