@@ -94,8 +94,6 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 		
 		if (IOHIDManagerOpen(_manager, kIOHIDOptionsTypeNone) != kIOReturnSuccess)
 		{
-			IOHIDManagerUnscheduleFromRunLoop(_manager, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
-			CFRelease(_manager);
 			return nil;
 		}
 	}
@@ -129,7 +127,11 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 	for (int i = 0; i < deviceCount; i++)
 	{
 		HIDDevice *device = [[HIDDevice alloc] initWithDeviceRef:deviceArray[i]];
-		[devices addObject:device];
+		
+		if (device)
+		{
+			[devices addObject:device];
+		}
 	}
 	
 	CFRelease(rawDevices);
