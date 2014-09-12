@@ -43,6 +43,7 @@
 	if (_element)
 	{
 		CFRelease(_element);
+		_element = NULL;
 	}
 }
 

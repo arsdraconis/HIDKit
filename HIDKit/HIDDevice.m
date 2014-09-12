@@ -55,6 +55,7 @@
 		IOHIDDeviceClose(_device, kIOHIDOptionsTypeNone); // Possible bug. What's the behavior of passing an unopened device?
 		IOHIDDeviceUnscheduleFromRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 		CFRelease(_device);
+		_device = NULL;
 	}
 }
 

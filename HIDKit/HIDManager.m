@@ -109,6 +109,7 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 		IOHIDManagerClose(_manager, kIOHIDOptionsTypeNone);
 		IOHIDManagerUnscheduleFromRunLoop(_manager, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 		CFRelease(_manager);
+		_manager = NULL;
 	}
 }
 

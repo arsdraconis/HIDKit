@@ -103,6 +103,7 @@
 	if (_value)
 	{
 		CFRelease(_value);
+		_value = NULL;
 	}
 }
 

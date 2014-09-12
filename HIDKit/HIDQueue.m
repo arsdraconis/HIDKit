@@ -69,6 +69,7 @@
 		// FIXME: Can we pass something that's already been unscheduled?
 		IOHIDQueueUnscheduleFromRunLoop(_queue, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 		CFRelease(_queue);
+		_queue = NULL;
 	}
 }
 

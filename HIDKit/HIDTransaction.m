@@ -74,6 +74,7 @@ void HIDTransactionCallback(void *context, IOReturn result, void *sender);
 		// FIXME: Can we pass something that's already been unscheduled?
 		IOHIDTransactionUnscheduleFromRunLoop(_transaction, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 		CFRelease(_transaction);
+		_transaction = NULL;
 	}
 }
 
