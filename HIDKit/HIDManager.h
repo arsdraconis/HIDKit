@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+/// The notification that lets observers know a device has been connected.
+NSString * const HIDManagerDeviceDidConnectNotification;
+/// The notification that lets observers know a device has been disconnected.
+NSString * const HIDManagerDeviceDidDisconnectNotification;
+
+
 /**
 	HIDManager is an Objective-C wrapper around OS X's IOHIDManager.
  */
