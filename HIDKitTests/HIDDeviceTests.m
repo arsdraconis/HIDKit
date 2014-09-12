@@ -45,15 +45,23 @@
 	
 	// Get a test device.
 	CFSetRef rawDevices = IOHIDManagerCopyDevices(_manager);
-	NSSet *devices = (__bridge NSSet *)rawDevices;
-	_testDevice = (__bridge IOHIDDeviceRef)([devices anyObject]);
-	XCTAssert(_testDevice, @"No test device was retrieved.");
+	CFIndex numDevices = CFSetGetCount(rawDevices);
+	IOHIDDeviceRef *deviceArray = calloc(numDevices, sizeof(IOHIDDeviceRef));
+	CFSetGetValues(rawDevices, (const void **)deviceArray);
 	
-	CFRetain(_testDevice);
+	_testDevice = deviceArray[0];	// Take the first device.
+	
 	CFRelease(rawDevices);
+	free(deviceArray);
+	deviceArray = NULL;
 	
+	XCTAssert(_testDevice, @"No test device was retrieved.");
+
 	// Note the retain count.
+	CFRetain(_testDevice);
 	_testDeviceRetainCount = CFGetRetainCount(_testDevice);
+	
+	NSLog(@"Test device retain count after setUp: %ld", CFGetRetainCount(_testDevice));
 }
 
 - (void)tearDown {
@@ -61,6 +69,7 @@
     [super tearDown];
 	
 	// Release test device and manager.
+	NSLog(@"Test device retain count before tearDown: %ld", CFGetRetainCount(_testDevice));
 	CFRelease(_testDevice);
 	IOHIDManagerClose(_manager, kIOHIDOptionsTypeNone);
 	CFRelease(_manager);
@@ -76,6 +85,12 @@
 	
 	device = nil;
 	XCTAssertEqual(_testDeviceRetainCount, CFGetRetainCount(_testDevice), @"HIDDevice did not release device ref on dealloc.");
+}
+
+- (void)testInitWithNullDevice
+{
+	XCTAssertThrows([[HIDDevice alloc] initWithDeviceRef:NULL], @"HIDDevice did not throw an exception when passed a NULL device ref.");
+	XCTAssertThrows([[HIDDevice alloc] init], @"HIDDevice did not throw an exception when initialized with -init.");
 }
 
 #if 0
