@@ -27,6 +27,14 @@
 		1671F8B919BB702100F83913 /* HIDDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671F8B719BB702100F83913 /* HIDDevice.m */; };
 		168CBAD319BC76B800E992BD /* HIDDevice+DeviceProperties.h in Headers */ = {isa = PBXBuildFile; fileRef = 168CBAD119BC76B800E992BD /* HIDDevice+DeviceProperties.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		168CBAD419BC76B800E992BD /* HIDDevice+DeviceProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 168CBAD219BC76B800E992BD /* HIDDevice+DeviceProperties.m */; };
+		16C310E919C30707000983ED /* HIDDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671F8B719BB702100F83913 /* HIDDevice.m */; };
+		16C310EA19C30729000983ED /* HIDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671F8B319BB4F1300F83913 /* HIDManager.m */; };
+		16C310EB19C30729000983ED /* HIDDevice+DeviceProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 168CBAD219BC76B800E992BD /* HIDDevice+DeviceProperties.m */; };
+		16C310EC19C30729000983ED /* HIDElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 161661D819BD9ADB006C7696 /* HIDElement.m */; };
+		16C310ED19C30729000983ED /* HIDElement+ElementProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 16673A9819BDB04D0065B330 /* HIDElement+ElementProperties.m */; };
+		16C310EE19C30729000983ED /* HIDValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 16673AA019BDC01D0065B330 /* HIDValue.m */; };
+		16C310EF19C30729000983ED /* HIDQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 1671454419C05AFF008881D3 /* HIDQueue.m */; };
+		16C310F019C30729000983ED /* HIDTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 16250FDD19C0666F006D620D /* HIDTransaction.m */; };
 		16F1970619C3000C0058AD39 /* HIDDeviceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 16F1970519C3000C0058AD39 /* HIDDeviceTests.m */; };
 /* End PBXBuildFile section */
 
@@ -279,6 +287,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				16C310EA19C30729000983ED /* HIDManager.m in Sources */,
+				16C310EB19C30729000983ED /* HIDDevice+DeviceProperties.m in Sources */,
+				16C310EC19C30729000983ED /* HIDElement.m in Sources */,
+				16C310ED19C30729000983ED /* HIDElement+ElementProperties.m in Sources */,
+				16C310EE19C30729000983ED /* HIDValue.m in Sources */,
+				16C310EF19C30729000983ED /* HIDQueue.m in Sources */,
+				16C310F019C30729000983ED /* HIDTransaction.m in Sources */,
+				16C310E919C30707000983ED /* HIDDevice.m in Sources */,
 				16F1970619C3000C0058AD39 /* HIDDeviceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
