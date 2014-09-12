@@ -15,8 +15,8 @@
 //------------------------------------------------------------------------------
 #pragma mark Notification Keys
 //------------------------------------------------------------------------------
-NSString * const HIDManagerDeviceConnectedNotification = @"HIDManagerDeviceConnected";
-NSString * const HIDManagerDeviceRemovedNotification = @"HIDManagerDeviceRemoved";
+NSString * const HIDManagerDeviceDidConnectNotification = @"HIDManagerDeviceDidConnectNotification";
+NSString * const HIDManagerDeviceDidDisconnectNotification = @"HIDManagerDeviceDidDisconnectNotification";
 
 
 
@@ -25,12 +25,12 @@ NSString * const HIDManagerDeviceRemovedNotification = @"HIDManagerDeviceRemoved
 //------------------------------------------------------------------------------
 static void HIDManagerDeviceMatchCallback(void * context, IOReturn result, void * sender, IOHIDDeviceRef device)
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:HIDManagerDeviceConnectedNotification object:(__bridge id)context];
+	[[NSNotificationCenter defaultCenter] postNotificationName:HIDManagerDeviceDidConnectNotification object:(__bridge id)context];
 }
 
 static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, void * sender, IOHIDDeviceRef device)
 {
-	[[NSNotificationCenter defaultCenter] postNotificationName:HIDManagerDeviceRemovedNotification object:(__bridge id)context];
+	[[NSNotificationCenter defaultCenter] postNotificationName:HIDManagerDeviceDidDisconnectNotification object:(__bridge id)context];
 }
 
 
