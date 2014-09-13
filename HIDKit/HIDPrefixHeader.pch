@@ -15,9 +15,9 @@
 
 // Strip debug printing on release build.
 #ifdef DEBUG
-	#define NSLog(...) NSLog(__VA_ARGS__)
+	#define HIDLog(...) NSLog(__VA_ARGS__)
 #else
-	#define NSLog(...) do {} while (0)
+	#define HIDLog(...) do {} while (0)
 #endif
 
 
