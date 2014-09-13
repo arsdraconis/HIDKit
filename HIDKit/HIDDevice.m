@@ -7,6 +7,7 @@
 //
 
 #import "HIDDevice.h"
+#import "HIDDevice+DeviceProperties.h"
 #import "HIDDevice+Private.h"
 #import "HIDElement.h"
 
@@ -44,6 +45,8 @@
 		{
 			return nil;
 		}
+		
+		HIDLog(@"Device created: %@", self.description);
 	}
 	return self;
 }
@@ -68,6 +71,18 @@
 	return IOHIDDeviceGetService(_device);
 }
 
+//------------------------------------------------------------------------------
+#pragma mark Describing the Device
+//------------------------------------------------------------------------------
+- (NSString *)description
+{
+	return [NSString stringWithFormat:@"HIDDevice: %p \n \
+	{ \n \
+			\tName: %@ \n \
+			\tManufacturer: %@ \n \
+			\tIOHIDDeviceRef: %p \n \
+	}", self, self.product, self.manufacturer, self.device];
+}
 
 //------------------------------------------------------------------------------
 #pragma mark Interacting with Device Properties
