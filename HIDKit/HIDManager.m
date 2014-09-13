@@ -116,12 +116,15 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 		{
 			return nil;
 		}
+		
+		HIDLog(@"HIDManager created.");
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	HIDLog(@"Deallocating HIDManager...");
 	if (_manager)
 	{
 		IOHIDManagerUnscheduleFromRunLoop(_manager, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
