@@ -90,7 +90,19 @@
 //------------------------------------------------------------------------------
 - (NSString *)getStringProperty:(CFStringRef)key
 {
-	return (NSString *)CFBridgingRelease(IOHIDDeviceGetProperty(_device,  key));
+	CFTypeRef value = IOHIDDeviceGetProperty(_device,  key);
+	
+	NSString *ret;
+	if (value)
+	{
+		ret = [NSString stringWithString:(__bridge NSString *)value];
+	}
+	else
+	{
+		ret = @"Unknown";
+	}
+	
+	return ret;
 }
 
 - (BOOL)getUInt32Property:(uint32_t *)outValue forKey:(CFStringRef)key
