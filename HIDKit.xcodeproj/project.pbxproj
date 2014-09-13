@@ -46,6 +46,7 @@
 		16250FD819C06370006D620D /* HIDValue+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HIDValue+Private.h"; sourceTree = "<group>"; };
 		16250FDC19C0666F006D620D /* HIDTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HIDTransaction.h; sourceTree = "<group>"; };
 		16250FDD19C0666F006D620D /* HIDTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HIDTransaction.m; sourceTree = "<group>"; };
+		1649514B19C44A0E00E0E836 /* HIDPrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HIDPrefixHeader.pch; sourceTree = "<group>"; };
 		16673A9719BDB04D0065B330 /* HIDElement+ElementProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HIDElement+ElementProperties.h"; sourceTree = "<group>"; };
 		16673A9819BDB04D0065B330 /* HIDElement+ElementProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HIDElement+ElementProperties.m"; sourceTree = "<group>"; };
 		16673A9B19BDB44C0065B330 /* HIDElement+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HIDElement+Private.h"; sourceTree = "<group>"; };
@@ -136,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				1671F89D19BB4EDC00F83913 /* Info.plist */,
+				1649514B19C44A0E00E0E836 /* HIDPrefixHeader.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
