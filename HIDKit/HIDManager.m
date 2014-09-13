@@ -8,6 +8,7 @@
 
 #import "HIDManager.h"
 #import "HIDDevice.h"
+#import "HIDDevice+Private.h"
 @import IOKit.hid;
 
 
@@ -21,23 +22,6 @@ NSString * const HIDManagerDeviceDidDisconnectNotification = @"HIDManagerDeviceD
 
 
 //------------------------------------------------------------------------------
-#pragma mark Device Callback Functions
-//------------------------------------------------------------------------------
-static void HIDManagerDeviceMatchCallback(void * context, IOReturn result, void * sender, IOHIDDeviceRef device)
-{
-	NSLog(@"Device connected: %p", device);
-	[[NSNotificationCenter defaultCenter] postNotificationName:HIDManagerDeviceDidConnectNotification object:(__bridge id)context];
-}
-
-static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, void * sender, IOHIDDeviceRef device)
-{
-	NSLog(@"Device disconnected: %p", device);
-	[[NSNotificationCenter defaultCenter] postNotificationName:HIDManagerDeviceDidDisconnectNotification object:(__bridge id)context];
-}
-
-
-
-//------------------------------------------------------------------------------
 #pragma mark Private Class Extension
 //------------------------------------------------------------------------------
 @interface HIDManager ()
@@ -46,6 +30,42 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 @property (readonly) NSMutableArray *devices;
 
 @end
+
+
+
+//------------------------------------------------------------------------------
+#pragma mark Device Callback Functions
+//------------------------------------------------------------------------------
+static void HIDManagerDeviceMatchCallback(void * context, IOReturn result, void * sender, IOHIDDeviceRef device)
+{
+	NSLog(@"Device connected: %p", device);
+	
+	HIDManager *manager = (__bridge HIDManager *)context;
+	HIDDevice *newDevice = [[HIDDevice alloc] initWithDeviceRef:device];
+	[manager.devices addObject:newDevice];
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:HIDManagerDeviceDidConnectNotification object:newDevice];
+}
+
+static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, void * sender, IOHIDDeviceRef device)
+{
+	NSLog(@"Device disconnected: %p", device);
+	
+	HIDManager *manager = (__bridge HIDManager *)context;
+	for (HIDDevice *oldDevice in manager.devices)
+	{
+		if (oldDevice.device == device)
+		{
+			// FIXME: We really should have a way as marking a device as removed.
+			// We can't just deallocate it here since others may be referencing it.
+			// Plus, we can then pass it along in our notification later.
+			[manager.devices removeObject:oldDevice];
+		}
+	}
+	
+	[[NSNotificationCenter defaultCenter] postNotificationName:HIDManagerDeviceDidDisconnectNotification object:nil];
+}
+
 
 
 
