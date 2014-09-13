@@ -145,7 +145,7 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 
 - (void)dealloc
 {
-	[self cleanup];
+	[self performSelectorOnMainThread:@selector(cleanup) withObject:nil waitUntilDone:YES];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
