@@ -25,11 +25,13 @@ NSString * const HIDManagerDeviceDidDisconnectNotification = @"HIDManagerDeviceD
 //------------------------------------------------------------------------------
 static void HIDManagerDeviceMatchCallback(void * context, IOReturn result, void * sender, IOHIDDeviceRef device)
 {
+	HIDLog(@"Device match callback on %p", device);
 	[[NSNotificationCenter defaultCenter] postNotificationName:HIDManagerDeviceDidConnectNotification object:(__bridge id)context];
 }
 
 static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, void * sender, IOHIDDeviceRef device)
 {
+	HIDLog(@"Device removal callback on %p", device);
 	[[NSNotificationCenter defaultCenter] postNotificationName:HIDManagerDeviceDidDisconnectNotification object:(__bridge id)context];
 }
 
@@ -91,12 +93,15 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 		{
 			return nil;
 		}
+		
+		HIDLog(@"HIDManager created.");
 	}
 	return self;
 }
 
 - (void)dealloc
 {
+	HIDLog(@"Deallocating HIDManager...");
 	if (_manager)
 	{
 		IOHIDManagerUnscheduleFromRunLoop(_manager, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
