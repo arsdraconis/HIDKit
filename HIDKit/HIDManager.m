@@ -25,11 +25,13 @@ NSString * const HIDManagerDeviceDidDisconnectNotification = @"HIDManagerDeviceD
 //------------------------------------------------------------------------------
 static void HIDManagerDeviceMatchCallback(void * context, IOReturn result, void * sender, IOHIDDeviceRef device)
 {
+	NSLog(@"Device connected: %p", device);
 	[[NSNotificationCenter defaultCenter] postNotificationName:HIDManagerDeviceDidConnectNotification object:(__bridge id)context];
 }
 
 static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, void * sender, IOHIDDeviceRef device)
 {
+	NSLog(@"Device disconnected: %p", device);
 	[[NSNotificationCenter defaultCenter] postNotificationName:HIDManagerDeviceDidDisconnectNotification object:(__bridge id)context];
 }
 
@@ -41,6 +43,7 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 @interface HIDManager ()
 
 @property IOHIDManagerRef manager;
+@property (readonly) NSMutableArray *devices;
 
 @end
 
@@ -76,6 +79,8 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 	self = [super init];
 	if (self)
 	{
+		_devices = [NSMutableArray array];
+		
 		_manager = IOHIDManagerCreate(kCFAllocatorDefault, kIOHIDOptionsTypeNone);
 		if (!_manager)
 		{
@@ -117,6 +122,10 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 //------------------------------------------------------------------------------
 + (NSArray *)devices
 {
+	return [[HIDManager sharedManager].devices copy];
+	
+#if 0
+	NSLog(@"HIDManager is retrieving devices.");
 	CFSetRef rawDevices = IOHIDManagerCopyDevices([HIDManager sharedManager].manager);
 	CFIndex deviceCount = CFSetGetCount(rawDevices);
 	
@@ -139,11 +148,12 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 	deviceArray = NULL;
 	
 	return [devices copy];
+#endif
 }
 
 + (NSArray *)devicesMatchingDictionary:(NSDictionary *)criteria
 {
-	NSMutableArray *devices = [[[self class] devices] mutableCopy];
+	NSMutableArray *devices = [[HIDManager sharedManager].devices mutableCopy];
 	
 	// TODO: Implement me!
 	
