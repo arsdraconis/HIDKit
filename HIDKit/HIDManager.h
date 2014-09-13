@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 ars draconis. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
 /// The notification that lets observers know a device has been connected.
 extern NSString * const HIDManagerDeviceDidConnectNotification;

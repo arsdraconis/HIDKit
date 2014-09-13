@@ -121,21 +121,32 @@ static void HIDManagerDeviceRemovedCallback(void * context, IOReturn result, voi
 			return nil;
 		}
 		
+		[[NSNotificationCenter defaultCenter] addObserver:self
+												 selector:@selector(cleanup)
+													 name:NSApplicationWillTerminateNotification
+												   object:nil];
 		HIDLog(@"HIDManager created.");
 	}
 	return self;
 }
 
-- (void)dealloc
+- (void)cleanup
 {
-	HIDLog(@"Deallocating HIDManager...");
 	if (_manager)
 	{
+		HIDLog(@"HIDManager cleaning up.");
 		IOHIDManagerUnscheduleFromRunLoop(_manager, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 		IOHIDManagerClose(_manager, kIOHIDOptionsTypeNone);
 		CFRelease(_manager);
 		_manager = NULL;
 	}
+	
+}
+
+- (void)dealloc
+{
+	[self cleanup];
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
