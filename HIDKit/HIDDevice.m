@@ -55,6 +55,7 @@
 {
 	if (_device)
 	{
+		HIDLog(@"Deallocating device: %@", self.description);
 		IOHIDDeviceUnscheduleFromRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 		IOHIDDeviceClose(_device, kIOHIDOptionsTypeNone); // Possible bug. What's the behavior of passing an unopened device?
 		CFRelease(_device);
