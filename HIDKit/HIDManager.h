@@ -9,9 +9,9 @@
 #import <Foundation/Foundation.h>
 
 /// The notification that lets observers know a device has been connected.
-NSString * const HIDManagerDeviceDidConnectNotification;
+extern NSString * const HIDManagerDeviceDidConnectNotification;
 /// The notification that lets observers know a device has been disconnected.
-NSString * const HIDManagerDeviceDidDisconnectNotification;
+extern NSString * const HIDManagerDeviceDidDisconnectNotification;
 
 
 /**
