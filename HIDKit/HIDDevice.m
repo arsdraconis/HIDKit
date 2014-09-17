@@ -38,13 +38,6 @@
 		_device = deviceRef;
 		
 //		IOHIDDeviceRegisterInputValueCallback(_device, &DS4DeviceInputValueCallback, (__bridge void *)self);
-		IOHIDDeviceScheduleWithRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
-		
-		IOReturn success = IOHIDDeviceOpen(_device, kIOHIDOptionsTypeNone);
-		if (success != kIOReturnSuccess)
-		{
-			return nil;
-		}
 		
 		HIDLog(@"Device created: %@", self.description);
 	}
@@ -55,9 +48,13 @@
 {
 	if (_device)
 	{
-		HIDLog(@"Deallocating device: %@", self.description);
-		IOHIDDeviceUnscheduleFromRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
-		IOHIDDeviceClose(_device, kIOHIDOptionsTypeNone); // Possible bug. What's the behavior of passing an unopened device?
+		if (_isOpen)
+		{
+			HIDLog(@"Device was released without closing: %@", self.description);
+			IOHIDDeviceUnscheduleFromRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
+			IOHIDDeviceClose(_device, kIOHIDOptionsTypeNone);
+		}
+		
 		CFRelease(_device);
 		_device = NULL;
 	}
@@ -83,6 +80,41 @@
 			\tManufacturer: %@ \n \
 			\tIOHIDDeviceRef: %p \n \
 	}", self, self.product, self.manufacturer, self.device];
+}
+
+
+//------------------------------------------------------------------------------
+#pragma mark Opening and Closing the Device
+//------------------------------------------------------------------------------
+
+- (void)open
+{
+	IOHIDDeviceScheduleWithRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
+	IOReturn success = IOHIDDeviceOpen(_device, kIOHIDOptionsTypeNone);
+	
+	if (success != kIOReturnSuccess)
+	{
+		self.isOpen = YES;
+	}
+	else
+	{
+		self.isOpen = NO;
+	}
+}
+
+- (void)close
+{
+	IOHIDDeviceUnscheduleFromRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
+	IOReturn success = IOHIDDeviceClose(_device, kIOHIDOptionsTypeNone);
+	
+	if (success != kIOReturnSuccess)
+	{
+		self.isOpen = NO;
+	}
+	else
+	{
+		self.isOpen = YES;
+	}
 }
 
 //------------------------------------------------------------------------------

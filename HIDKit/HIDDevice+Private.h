@@ -13,6 +13,7 @@
 @interface HIDDevice ()
 
 @property IOHIDDeviceRef device;
+@property (readwrite) BOOL isOpen;
 
 - (NSString *)getStringProperty:(CFStringRef)key;
 - (BOOL)getUInt32Property:(uint32_t *)outValue forKey:(CFStringRef)key;

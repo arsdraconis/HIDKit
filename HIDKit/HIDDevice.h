@@ -26,6 +26,11 @@
  */
 - (instancetype)initWithDeviceRef:(IOHIDDeviceRef)deviceRef NS_DESIGNATED_INITIALIZER;
 
+/// Returns whether the device is currently open.
+@property (readonly) BOOL isOpen;
+- (void)open;
+- (void)close;
+
 /// Allows access to the device's io_service_t service.
 @property (readonly) io_service_t service;
 
