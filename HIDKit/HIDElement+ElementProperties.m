@@ -14,7 +14,7 @@
 @dynamic name;
 - (NSString *)name
 {
-	return (NSString *)CFBridgingRelease(IOHIDElementGetName(self.element) );
+	return [self getStringProperty:CFSTR(kIOHIDElementNameKey)];
 }
 
 @dynamic cookie;

@@ -71,4 +71,50 @@
 	return [children copy];
 }
 
+
+//------------------------------------------------------------------------------
+#pragma mark Interacting with Device Properties
+//------------------------------------------------------------------------------
+- (NSString *)getStringProperty:(CFStringRef)key
+{
+	CFTypeRef value = IOHIDElementGetProperty(_element, key);
+	
+	NSString *ret;
+	if (value)
+	{
+		ret = [NSString stringWithString:(__bridge NSString *)value];
+	}
+	else
+	{
+		ret = @"Unknown";
+	}
+	
+	return ret;
+}
+
+- (BOOL)getUInt32Property:(uint32_t *)outValue forKey:(CFStringRef)key
+{
+	BOOL result = NO;
+	
+	CFTypeRef value = IOHIDElementGetProperty(_element, key);
+	if (value && CFNumberGetTypeID() == CFGetTypeID(value) )
+	{
+		result = (BOOL)CFNumberGetValue( (CFNumberRef)value, kCFNumberSInt32Type, outValue);
+	}
+	
+	return result;
+}
+
+- (void)setUInt32Property:(CFStringRef)key value:(uint32_t)value
+{
+	CFNumberRef numberRef = CFNumberCreate(kCFAllocatorDefault, kCFNumberSInt32Type, &value);
+	
+	if (numberRef)
+	{
+		IOHIDElementSetProperty(_element, key, numberRef);
+		CFRelease(numberRef);
+	}
+}
+
+
 @end

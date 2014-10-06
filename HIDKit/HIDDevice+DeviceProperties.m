@@ -23,7 +23,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDVendorIDKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic vendorIDSource;
@@ -31,7 +31,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDVendorIDSourceKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic productID;
@@ -39,7 +39,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDProductIDKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic locationID;
@@ -47,7 +47,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDLocationIDKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic versionNumber;
@@ -55,7 +55,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDVersionNumberKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic manufacturer;
@@ -81,7 +81,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDCountryCodeKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic deviceUsage;
@@ -89,7 +89,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDDeviceUsageKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic deviceUsagePage;
@@ -97,7 +97,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDDeviceUsagePageKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic deviceUsagePairs;
@@ -113,7 +113,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDPrimaryUsageKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic primaryUsagePage;
@@ -121,7 +121,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDPrimaryUsagePageKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic maxInputReportSize;
@@ -129,7 +129,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDMaxInputReportSizeKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic maxOutputReportSize;
@@ -137,7 +137,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDMaxOutputReportSizeKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic maxFeatureReportSize;
@@ -145,7 +145,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDMaxFeatureReportSizeKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic maxResponseLatency;
@@ -153,7 +153,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDMaxResponseLatencyKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic reportInterval;
@@ -161,7 +161,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDReportIntervalKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic sampleInterval;
@@ -169,7 +169,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDSampleIntervalKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 @dynamic requestTimeout;
@@ -177,7 +177,7 @@
 {
 	uint32_t result;
 	[self getUInt32Property:&result forKey:CFSTR(kIOHIDRequestTimeoutKey)];
-	return result;
+	return (result) ? result : 0;
 }
 
 
