@@ -167,15 +167,25 @@
 @dynamic elements;
 - (NSArray *)elements
 {
-	NSArray *rawElements = CFBridgingRelease(IOHIDDeviceCopyMatchingElements(_device, NULL, kIOHIDOptionsTypeNone) );
+
+	CFArrayRef rawElements = IOHIDDeviceCopyMatchingElements(_device, NULL, kIOHIDOptionsTypeNone);
+	CFIndex elementCount = CFArrayGetCount(rawElements);
 	
-	NSMutableArray *elements = [NSMutableArray new];
-	for (id elementRef in rawElements)
+	NSMutableArray *elements = [NSMutableArray array];
+	for (int i = 0; i < elementCount; i++)
 	{
-		HIDElement *element = [[HIDElement alloc] initWithElementRef:(__bridge IOHIDElementRef)(elementRef) onDevice:self parent:nil];
-		[elements addObject:element];
+		IOHIDElementRef elementRef = (IOHIDElementRef)CFArrayGetValueAtIndex(rawElements, i);
+		HIDElement *element = [[HIDElement alloc] initWithElementRef:elementRef
+															onDevice:self
+															  parent:nil];
+		
+		if (element)
+		{
+			[elements addObject:element];
+		}
 	}
 	
+	CFRelease(rawElements);	
 	return [elements copy];
 }
 
