@@ -59,16 +59,30 @@
 @dynamic children;
 - (NSArray *)children
 {
-	NSArray *rawChildren = CFBridgingRelease(IOHIDElementGetChildren(_element) );
+	CFArrayRef rawChildren = IOHIDElementGetChildren(_element);
+	if (!rawChildren)
+		return [NSArray array];
 	
-	NSMutableArray *children = [NSMutableArray array];
-	for (id elementRef in rawChildren)
+	CFIndex elementCount = CFArrayGetCount(rawChildren);
+	
+	NSMutableArray *elements = [NSMutableArray array];
+	for (int i = 0; i < elementCount; i++)
 	{
-		HIDElement *child = [[HIDElement alloc] initWithElementRef:(__bridge IOHIDElementRef)elementRef onDevice:_device parent:self];
-		[children addObject:child];
+		IOHIDElementRef elementRef = (IOHIDElementRef)CFArrayGetValueAtIndex(rawChildren, i);
+		HIDElement *element = [[HIDElement alloc] initWithElementRef:elementRef
+															onDevice:_device
+															  parent:self];
+		
+		if (element)
+		{
+			HIDLog(@"Adding element %@", element);
+			[elements addObject:element];
+		}
 	}
 	
-	return [children copy];
+	CFRelease(rawChildren);
+	return [elements copy];
+
 }
 
 
