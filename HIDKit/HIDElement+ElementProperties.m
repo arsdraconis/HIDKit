@@ -14,7 +14,19 @@
 @dynamic name;
 - (NSString *)name
 {
-	return [self getStringProperty:CFSTR(kIOHIDElementNameKey)];
+	CFStringRef value = IOHIDElementGetName(self.element);
+	
+	NSString *ret;
+	if (value)
+	{
+		ret = [NSString stringWithString:(__bridge NSString *)value];
+	}
+	else
+	{
+		ret = @"Unknown Element";
+	}
+	
+	return ret;
 }
 
 @dynamic cookie;
