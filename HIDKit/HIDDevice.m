@@ -223,7 +223,7 @@
 
 - (NSArray *)elementsMatchingDictionary:(NSDictionary *)criteria
 {
-	NSMutableArray *elements = [self.elements mutableCopy];
+	NSMutableArray *elements = [self.allElements mutableCopy];
 	
 	// TODO: Write me!
 	
