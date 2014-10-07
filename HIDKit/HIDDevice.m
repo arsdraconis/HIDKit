@@ -175,12 +175,18 @@
 	for (int i = 0; i < elementCount; i++)
 	{
 		IOHIDElementRef elementRef = (IOHIDElementRef)CFArrayGetValueAtIndex(rawElements, i);
+		if (IOHIDElementGetParent(elementRef))
+		{
+			continue;
+		}
+		
 		HIDElement *element = [[HIDElement alloc] initWithElementRef:elementRef
 															onDevice:self
 															  parent:nil];
 		
 		if (element)
 		{
+			HIDLog(@"Adding element %@", element);
 			[elements addObject:element];
 		}
 	}
