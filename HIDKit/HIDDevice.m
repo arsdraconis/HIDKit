@@ -167,7 +167,6 @@
 @dynamic elements;
 - (NSArray *)elements
 {
-
 	CFArrayRef rawElements = IOHIDDeviceCopyMatchingElements(_device, NULL, kIOHIDOptionsTypeNone);
 	CFIndex elementCount = CFArrayGetCount(rawElements);
 	
@@ -192,6 +191,33 @@
 	}
 	
 	CFRelease(rawElements);	
+	return [elements copy];
+}
+
+// TODO: Way too much duplication. Refactor.
+// FIXME: There's a bug in this.
+- (NSArray *)allElements
+{
+	CFArrayRef rawElements = IOHIDDeviceCopyMatchingElements(_device, NULL, kIOHIDOptionsTypeNone);
+	CFIndex elementCount = CFArrayGetCount(rawElements);
+	
+	NSMutableArray *elements = [NSMutableArray array];
+	for (int i = 0; i < elementCount; i++)
+	{
+		IOHIDElementRef elementRef = (IOHIDElementRef)CFArrayGetValueAtIndex(rawElements, i);
+		
+		HIDElement *element = [[HIDElement alloc] initWithElementRef:elementRef
+															onDevice:self
+															  parent:nil];
+		
+		if (element)
+		{
+			HIDLog(@"Adding element %@", element);
+			[elements addObject:element];
+		}
+	}
+	
+	CFRelease(rawElements);
 	return [elements copy];
 }
 
