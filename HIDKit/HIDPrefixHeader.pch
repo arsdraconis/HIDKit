@@ -15,7 +15,7 @@
 
 // Strip debug printing on release build.
 #ifdef DEBUG
-	#define HIDLog(...) NSLog(__VA_ARGS__)
+	#define HIDLog(...) NSLog(@"[HID Kit]: %@", [NSString stringWithFormat: __VA_ARGS__ ])
 #else
 	#define HIDLog(...) do {} while (0)
 #endif
