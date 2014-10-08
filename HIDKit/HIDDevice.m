@@ -176,6 +176,7 @@
 		IOHIDElementRef elementRef = (IOHIDElementRef)CFArrayGetValueAtIndex(rawElements, i);
 		if (IOHIDElementGetParent(elementRef))
 		{
+			HIDLog(@"Element with parent skipped. Element cookie: %u", IOHIDElementGetCookie(elementRef));
 			continue;
 		}
 		
