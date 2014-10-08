@@ -56,6 +56,12 @@
 	return IOHIDElementGetType(_element);
 }
 
+@dynamic collectionType;
+- (IOHIDElementCollectionType)collectionType
+{
+	return IOHIDElementGetCollectionType(_element);
+}
+
 @dynamic children;
 - (NSArray *)children
 {

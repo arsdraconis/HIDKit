@@ -35,5 +35,7 @@
 
 /// The element type of this element.
 @property (readonly) IOHIDElementType type;
+/// The collection type of this element, if applicable.
+@property (readonly) IOHIDElementCollectionType collectionType;
 
 @end
