@@ -86,7 +86,7 @@
 		}
 	}
 	
-	CFRelease(rawChildren);
+//	CFRelease(rawChildren);
 	return [elements copy];
 
 }
