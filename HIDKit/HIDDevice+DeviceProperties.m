@@ -9,6 +9,11 @@
 #import "HIDDevice+DeviceProperties.h"
 #import "HIDDevice+Private.h"
 
+// Usage Pairs Keys
+const NSString * HIDDeviceUsagePairsUsageKey = (NSString *)CFSTR(kIOHIDDeviceUsageKey);
+const NSString * HIDDeviceUsagePairsUsagePageKey = (NSString *)CFSTR(kIOHIDDeviceUsagePageKey);
+
+
 
 @implementation HIDDevice (DeviceProperties)
 
@@ -103,9 +108,20 @@
 @dynamic deviceUsagePairs;
 - (NSArray *)deviceUsagePairs
 {
-	// TODO: Write me!
-	NSLog(@"Method unimplemented.");
-	return [NSArray new];
+	CFTypeRef array = IOHIDDeviceGetProperty(self.device, CFSTR(kIOHIDDeviceUsagePairsKey) );
+	NSMutableArray *pairs = [NSMutableArray array];
+	
+	if (array && CFGetTypeID(array) == CFArrayGetTypeID())
+	{
+		NSArray *devicePairs = CFBridgingRelease(array);
+		for (id pair in devicePairs)
+		{
+			NSDictionary *dict = [NSDictionary dictionaryWithDictionary:(NSDictionary *)pair];
+			[pairs addObject:dict];
+		}
+	}
+	
+	return [pairs copy];
 }
 
 @dynamic primaryUsage;

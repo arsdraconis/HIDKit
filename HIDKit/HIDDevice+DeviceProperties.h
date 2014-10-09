@@ -8,6 +8,10 @@
 
 #import "HIDDevice.h"
 
+extern const NSString * HIDDeviceUsagePairsUsageKey;
+extern const NSString * HIDDeviceUsagePairsUsagePageKey;
+
+
 @interface HIDDevice (DeviceProperties)
 
 /// Returns a string with the device's underlying transport.
