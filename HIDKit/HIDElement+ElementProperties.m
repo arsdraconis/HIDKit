@@ -16,14 +16,10 @@
 {
 	CFStringRef value = IOHIDElementGetName(self.element);
 	
-	NSString *ret;
+	NSString *ret = nil;
 	if (value)
 	{
 		ret = [NSString stringWithString:(__bridge NSString *)value];
-	}
-	else
-	{
-		ret = @"Unknown Element";
 	}
 	
 	return ret;

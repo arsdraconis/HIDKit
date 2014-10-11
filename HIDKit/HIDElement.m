@@ -99,14 +99,10 @@
 {
 	CFTypeRef value = IOHIDElementGetProperty(_element, key);
 	
-	NSString *ret;
+	NSString *ret = nil;
 	if (value)
 	{
 		ret = [NSString stringWithString:(__bridge NSString *)value];
-	}
-	else
-	{
-		ret = @"Unknown";
 	}
 	
 	return ret;
