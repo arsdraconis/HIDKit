@@ -13,12 +13,14 @@
 #import "HIDElement+ElementProperties.h"
 #import "HIDElement+Private.h"
 
+
 #define IS_INPUT_ELEMENT(x) x.type == kIOHIDElementTypeInput_Misc	|| \
 							x.type == kIOHIDElementTypeInput_Button	|| \
 							x.type == kIOHIDElementTypeInput_Axis	|| \
 							x.type == kIOHIDElementTypeInput_ScanCodes
 
 #define NSSTRING_FROM_COOKIE(x) [NSString stringWithFormat:@"%ud", x]
+
 
 //------------------------------------------------------------------------------
 #pragma mark Input Value Callback
@@ -73,8 +75,6 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 		CFRetain(deviceRef);
 		_device = deviceRef;
 		
-		IOHIDDeviceRegisterInputValueCallback(_device, &HIDDeviceInputValueCallback, (__bridge void *)self);
-		
 		HIDLog(@"Device created: %@", self.description);
 	}
 	return self;
@@ -96,6 +96,7 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 	}
 }
 
+
 //------------------------------------------------------------------------------
 #pragma mark Retrieving the I/O Service
 //------------------------------------------------------------------------------
@@ -104,6 +105,7 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 {
 	return IOHIDDeviceGetService(_device);
 }
+
 
 //------------------------------------------------------------------------------
 #pragma mark Describing the Device
@@ -122,13 +124,15 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 //------------------------------------------------------------------------------
 #pragma mark Opening and Closing the Device
 //------------------------------------------------------------------------------
-
 - (void)open
 {
 	IOReturn success = IOHIDDeviceOpen(_device, kIOHIDOptionsTypeNone);
 	
 	if (success == kIOReturnSuccess)
 	{
+		// Because the callback seems to be called regardless of whether we've been
+		// schedule on a run loop or not, we'll register it only when we open the device for use.
+		IOHIDDeviceRegisterInputValueCallback(_device, &HIDDeviceInputValueCallback, (__bridge void *)self);
 		IOHIDDeviceScheduleWithRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 		self.isOpen = YES;
 	}
@@ -144,6 +148,7 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 	
 	if (success == kIOReturnSuccess)
 	{
+		IOHIDDeviceRegisterInputValueCallback(_device, NULL, (__bridge void *)self);
 		IOHIDDeviceUnscheduleFromRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 		self.isOpen = NO;
 	}
@@ -152,6 +157,7 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 		self.isOpen = YES;
 	}
 }
+
 
 //------------------------------------------------------------------------------
 #pragma mark Interacting with Device Properties
@@ -192,6 +198,7 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 		CFRelease(numberRef);
 	}
 }
+
 
 //------------------------------------------------------------------------------
 #pragma mark Retrieving Device Elements
@@ -271,5 +278,13 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 	NSString *key = NSSTRING_FROM_COOKIE(cookie);
 	return _inputElements[key];
 }
+
+- (NSArray *)elementsMatchingDictionary:(NSDictionary *)criteria
+{
+	// TODO: Implement me!
+	NSLog(@"Method unimplemented: %s in %s, line %d.", __PRETTY_FUNCTION__, __FILE__, __LINE__);
+	return [NSArray array];
+}
+
 
 @end
