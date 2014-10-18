@@ -133,4 +133,14 @@
 }
 
 
+//------------------------------------------------------------------------------
+#pragma mark Signaling Value Changes
+//------------------------------------------------------------------------------
+- (void)didUpdateValue:(IOHIDValueRef)valueRef
+{
+	// TODO: Implement me!
+	NSLog(@"Method unimplemented: %s in %s, line %d.", __PRETTY_FUNCTION__, __FILE__, __LINE__);
+
+}
+
 @end
