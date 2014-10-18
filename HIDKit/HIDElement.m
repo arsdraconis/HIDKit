@@ -34,6 +34,8 @@
 		_element = element;
 		_device = device;
 		_parent = parentElement;
+		
+		[self populateChildren];
 	}
 	return self;
 }
@@ -45,6 +47,35 @@
 		CFRelease(_element);
 		_element = NULL;
 	}
+}
+
+- (void)populateChildren
+{
+	CFArrayRef rawChildren = IOHIDElementGetChildren(_element);
+	if (!rawChildren)
+	{
+		_children = [NSArray array];
+		return;
+	}
+	
+	CFIndex childCount = CFArrayGetCount(rawChildren);
+	NSMutableArray *currentChildren = [NSMutableArray array];
+	for (int i = 0; i < childCount; i++)
+	{
+		IOHIDElementRef elementRef = (IOHIDElementRef)CFArrayGetValueAtIndex(rawChildren, i);
+		HIDElement *element = [[HIDElement alloc] initWithElementRef:elementRef
+															onDevice:_device
+															  parent:self];
+		
+		if (element)
+		{
+			HIDLog(@"Adding element %@", element);
+			[currentChildren addObject:element];
+		}
+	}
+	
+	CFRelease(rawChildren);	// Why was this commented out?
+	_children = [currentChildren copy];
 }
 
 //------------------------------------------------------------------------------
@@ -60,35 +91,6 @@
 - (IOHIDElementCollectionType)collectionType
 {
 	return IOHIDElementGetCollectionType(_element);
-}
-
-@dynamic children;
-- (NSArray *)children
-{
-	CFArrayRef rawChildren = IOHIDElementGetChildren(_element);
-	if (!rawChildren)
-		return [NSArray array];
-	
-	CFIndex elementCount = CFArrayGetCount(rawChildren);
-	
-	NSMutableArray *elements = [NSMutableArray array];
-	for (int i = 0; i < elementCount; i++)
-	{
-		IOHIDElementRef elementRef = (IOHIDElementRef)CFArrayGetValueAtIndex(rawChildren, i);
-		HIDElement *element = [[HIDElement alloc] initWithElementRef:elementRef
-															onDevice:_device
-															  parent:self];
-		
-		if (element)
-		{
-			HIDLog(@"Adding element %@", element);
-			[elements addObject:element];
-		}
-	}
-	
-//	CFRelease(rawChildren);
-	return [elements copy];
-
 }
 
 

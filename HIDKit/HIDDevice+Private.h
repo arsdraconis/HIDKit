@@ -9,6 +9,8 @@
 #import "HIDDevice.h"
 
 
+@class HIDElement;
+
 // Private class extension for HIDDevice
 @interface HIDDevice ()
 
@@ -18,5 +20,7 @@
 - (NSString *)getStringProperty:(CFStringRef)key;
 - (BOOL)getUInt32Property:(uint32_t *)outValue forKey:(CFStringRef)key;
 - (void)setUInt32Property:(CFStringRef)key value:(uint32_t)value;
+
+- (HIDElement *)elementForValueRef:(IOHIDValueRef)valueRef;
 
 @end

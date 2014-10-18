@@ -10,9 +10,45 @@
 #import "HIDDevice+DeviceProperties.h"
 #import "HIDDevice+Private.h"
 #import "HIDElement.h"
+#import "HIDElement+ElementProperties.h"
+#import "HIDElement+Private.h"
 
-// Implementation
+#define IS_INPUT_ELEMENT(x) x.type == kIOHIDElementTypeInput_Misc	|| \
+							x.type == kIOHIDElementTypeInput_Button	|| \
+							x.type == kIOHIDElementTypeInput_Axis	|| \
+							x.type == kIOHIDElementTypeInput_ScanCodes
+
+#define NSSTRING_FROM_COOKIE(x) [NSString stringWithFormat:@"%ud", x]
+
+//------------------------------------------------------------------------------
+#pragma mark Input Value Callback
+//------------------------------------------------------------------------------
+static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * sender, IOHIDValueRef newValue)
+{
+	if (result != kIOReturnSuccess)
+	{
+		HIDLog(@"HIDDeviceInputValueCallback(): result from caller was %d", result);
+		return;
+	}
+	
+	HIDDevice *device = (__bridge HIDDevice *)context;
+	HIDElement *element = nil;		// Could be nil if it hasn't been created.
+	if ((element = [device elementForValueRef:newValue]))
+	{
+		[element didUpdateValue:newValue];
+	}
+}
+
+
+
+//------------------------------------------------------------------------------
+#pragma mark Implementation
+//------------------------------------------------------------------------------
 @implementation HIDDevice
+{
+	NSArray *_rootElements;
+	NSMutableDictionary *_inputElements;
+}
 
 
 //------------------------------------------------------------------------------
@@ -37,7 +73,7 @@
 		CFRetain(deviceRef);
 		_device = deviceRef;
 		
-//		IOHIDDeviceRegisterInputValueCallback(_device, &DS4DeviceInputValueCallback, (__bridge void *)self);
+		IOHIDDeviceRegisterInputValueCallback(_device, &HIDDeviceInputValueCallback, (__bridge void *)self);
 		
 		HIDLog(@"Device created: %@", self.description);
 	}
@@ -89,11 +125,11 @@
 
 - (void)open
 {
-	IOHIDDeviceScheduleWithRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 	IOReturn success = IOHIDDeviceOpen(_device, kIOHIDOptionsTypeNone);
 	
-	if (success != kIOReturnSuccess)
+	if (success == kIOReturnSuccess)
 	{
+		IOHIDDeviceScheduleWithRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 		self.isOpen = YES;
 	}
 	else
@@ -104,11 +140,11 @@
 
 - (void)close
 {
-	IOHIDDeviceUnscheduleFromRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 	IOReturn success = IOHIDDeviceClose(_device, kIOHIDOptionsTypeNone);
 	
-	if (success != kIOReturnSuccess)
+	if (success == kIOReturnSuccess)
 	{
+		IOHIDDeviceUnscheduleFromRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 		self.isOpen = NO;
 	}
 	else
@@ -163,16 +199,22 @@
 @dynamic elements;
 - (NSArray *)elements
 {
+	if (_rootElements)
+	{
+		return _rootElements;
+	}
+	
 	CFArrayRef rawElements = IOHIDDeviceCopyMatchingElements(_device, NULL, kIOHIDOptionsTypeNone);
 	CFIndex elementCount = CFArrayGetCount(rawElements);
 	
 	NSMutableArray *elements = [NSMutableArray array];
 	for (int i = 0; i < elementCount; i++)
 	{
+		// We're counting on HIDElement to recursively create instances of itself
+		// for all its children, so we're only focusing on the root elements.
 		IOHIDElementRef elementRef = (IOHIDElementRef)CFArrayGetValueAtIndex(rawElements, i);
 		if (IOHIDElementGetParent(elementRef))
 		{
-			HIDLog(@"Element with parent skipped. Element cookie: %u", IOHIDElementGetCookie(elementRef));
 			continue;
 		}
 		
@@ -188,43 +230,46 @@
 	}
 	
 	CFRelease(rawElements);	
-	return [elements copy];
+	_rootElements = [elements copy];
+	
+	_inputElements = [NSMutableDictionary dictionary];
+	[self recursivelyFindInputElements:_rootElements];
+	
+	return _rootElements;
 }
 
-// TODO: Way too much duplication. Refactor.
-// FIXME: There's a bug in this.
-- (NSArray *)allElements
+- (void)recursivelyFindInputElements:(NSArray *)rootElementsArray
 {
-	CFArrayRef rawElements = IOHIDDeviceCopyMatchingElements(_device, NULL, kIOHIDOptionsTypeNone);
-	CFIndex elementCount = CFArrayGetCount(rawElements);
-	
-	NSMutableArray *elements = [NSMutableArray array];
-	for (int i = 0; i < elementCount; i++)
+	for (HIDElement *element in rootElementsArray)
 	{
-		IOHIDElementRef elementRef = (IOHIDElementRef)CFArrayGetValueAtIndex(rawElements, i);
-		
-		HIDElement *element = [[HIDElement alloc] initWithElementRef:elementRef
-															onDevice:self
-															  parent:nil];
-		
-		if (element)
+		// Identify input elements.
+		if ( IS_INPUT_ELEMENT(element) )
 		{
-			HIDLog(@"Adding element %@", element);
-			[elements addObject:element];
+			NSString *key = NSSTRING_FROM_COOKIE(element.cookie);
+			_inputElements[key] = element;
+		}
+		
+		// Recurse to children.
+		NSArray *children = element.children;
+		if (children.count > 0)
+		{
+			return [self recursivelyFindInputElements:children];
 		}
 	}
-	
-	CFRelease(rawElements);
-	return [elements copy];
 }
 
-- (NSArray *)elementsMatchingDictionary:(NSDictionary *)criteria
+- (HIDElement *)elementForValueRef:(IOHIDValueRef)valueRef
 {
-	NSMutableArray *elements = [self.allElements mutableCopy];
+	if (!_inputElements)
+	{
+		return nil;
+	}
 	
-	// TODO: Write me!
+	IOHIDElementRef elementRef = IOHIDValueGetElement(valueRef);
+	uint32_t cookie = IOHIDElementGetCookie(elementRef);
 	
-	return [elements copy];
+	NSString *key = NSSTRING_FROM_COOKIE(cookie);
+	return _inputElements[key];
 }
 
 @end

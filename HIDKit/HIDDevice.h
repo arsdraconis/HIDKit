@@ -34,7 +34,7 @@
 /// Allows access to the device's io_service_t service.
 @property (readonly) io_service_t service;
 
-/// Returns all elements on the device.
+/// Returns the root elements on the device.
 @property (readonly) NSArray *elements;
 
 /**
