@@ -75,6 +75,10 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 		CFRetain(deviceRef);
 		_device = deviceRef;
 		
+		// These don't really seem to matter...
+		IOHIDDeviceRegisterInputValueCallback(_device, &HIDDeviceInputValueCallback, (__bridge void *)self);
+//		IOHIDDeviceScheduleWithRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
+		
 		HIDLog(@"Device created: %@", self.description);
 	}
 	return self;
@@ -86,11 +90,12 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 	{
 		if (_isOpen)
 		{
+			IOHIDDeviceRegisterInputValueCallback(_device, NULL, (__bridge void *)self);
+//			IOHIDDeviceUnscheduleFromRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 			HIDLog(@"Device was released without closing: %@", self.description);
-			IOHIDDeviceUnscheduleFromRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
-			IOHIDDeviceClose(_device, kIOHIDOptionsTypeNone);
 		}
 		
+		IOHIDDeviceClose(_device, kIOHIDOptionsTypeNone);
 		CFRelease(_device);
 		_device = NULL;
 	}
@@ -126,14 +131,10 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 //------------------------------------------------------------------------------
 - (void)open
 {
-	IOReturn success = IOHIDDeviceOpen(_device, kIOHIDOptionsTypeNone);
+	IOReturn success = kIOReturnSuccess;
 	
 	if (success == kIOReturnSuccess)
 	{
-		// Because the callback seems to be called regardless of whether we've been
-		// schedule on a run loop or not, we'll register it only when we open the device for use.
-		IOHIDDeviceRegisterInputValueCallback(_device, &HIDDeviceInputValueCallback, (__bridge void *)self);
-		IOHIDDeviceScheduleWithRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 		self.isOpen = YES;
 	}
 	else
@@ -144,12 +145,10 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 
 - (void)close
 {
-	IOReturn success = IOHIDDeviceClose(_device, kIOHIDOptionsTypeNone);
+	IOReturn success = kIOReturnSuccess;
 	
 	if (success == kIOReturnSuccess)
 	{
-		IOHIDDeviceRegisterInputValueCallback(_device, NULL, (__bridge void *)self);
-		IOHIDDeviceUnscheduleFromRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 		self.isOpen = NO;
 	}
 	else
@@ -231,7 +230,6 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 		
 		if (element)
 		{
-			HIDLog(@"Adding element %@", element);
 			[elements addObject:element];
 		}
 	}
