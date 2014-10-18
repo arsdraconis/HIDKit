@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 @import IOKit.hid;
 
-@class HIDDevice;
+@class HIDDevice, HIDValue;
 
 @interface HIDElement : NSObject
 
@@ -26,6 +26,9 @@
  */
 - (instancetype)initWithElementRef:(IOHIDElementRef)element onDevice:(HIDDevice *)device parent:(HIDElement *)parentElement NS_DESIGNATED_INITIALIZER;
 
+/// The current value of the element, expressed as an integer.
+@property (readonly) NSInteger integerValue;
+
 /// The device to which this element belongs to.
 @property (readonly) HIDDevice *device;
 /// The parent element of this element.
@@ -37,5 +40,8 @@
 @property (readonly) IOHIDElementType type;
 /// The collection type of this element, if applicable.
 @property (readonly) IOHIDElementCollectionType collectionType;
+
+/// The current value of the element.
+@property (readonly) HIDValue *value;
 
 @end

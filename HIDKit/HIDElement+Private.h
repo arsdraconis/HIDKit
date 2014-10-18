@@ -11,6 +11,7 @@
 
 @interface HIDElement ()
 
+@property (readwrite) NSInteger integerValue;
 @property (readwrite) NSArray *children;
 @property (readonly) IOHIDElementRef element;
 

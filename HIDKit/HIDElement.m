@@ -7,6 +7,7 @@
 //
 
 #import "HIDElement.h"
+#import "HIDElement+ElementProperties.h"
 #import "HIDElement+Private.h"
 
 @implementation HIDElement
@@ -36,6 +37,7 @@
 		_parent = parentElement;
 		
 		[self populateChildren];
+		
 	}
 	return self;
 }
@@ -69,7 +71,6 @@
 		
 		if (element)
 		{
-			HIDLog(@"Adding element %@", element);
 			[currentChildren addObject:element];
 		}
 	}
@@ -141,8 +142,17 @@
 - (void)didUpdateValue:(IOHIDValueRef)valueRef
 {
 	// TODO: Implement me!
-	NSLog(@"Method unimplemented: %s in %s, line %d.", __PRETTY_FUNCTION__, __FILE__, __LINE__);
-
+//	NSLog(@"Method unimplemented: %s in %s, line %d.", __PRETTY_FUNCTION__, __FILE__, __LINE__);
+	CFIndex length = IOHIDValueGetLength(valueRef);
+	if (length > 8)
+	{
+		HIDLog(@"** Ignoring input value longer than 8 bytes in length. ** \n \
+			   \t Length: %ld \n \
+			   \t Cookie: 0x%0X", length, self.cookie);
+		return;
+	}
+	
+	self.integerValue = (NSInteger)IOHIDValueGetIntegerValue(valueRef);
 }
 
 @end
