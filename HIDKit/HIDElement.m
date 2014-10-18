@@ -93,7 +93,7 @@
 
 
 //------------------------------------------------------------------------------
-#pragma mark Interacting with Device Properties
+#pragma mark Interacting with Element Properties
 //------------------------------------------------------------------------------
 - (NSString *)getStringProperty:(CFStringRef)key
 {
