@@ -79,6 +79,7 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 		IOHIDDeviceRegisterInputValueCallback(_device, &HIDDeviceInputValueCallback, (__bridge void *)self);
 //		IOHIDDeviceScheduleWithRunLoop(_device, CFRunLoopGetCurrent(), kCFRunLoopDefaultMode);
 		
+		IOHIDDeviceOpen(_device, kIOHIDOptionsTypeNone);
 		HIDLog(@"Device created: %@", self.description);
 	}
 	return self;
