@@ -22,5 +22,6 @@
 - (void)setUInt32Property:(CFStringRef)key value:(uint32_t)value;
 
 - (HIDElement *)elementForValueRef:(IOHIDValueRef)valueRef;
+- (void)handleInputValue:(IOHIDValueRef)valueRef result:(IOReturn)result;
 
 @end

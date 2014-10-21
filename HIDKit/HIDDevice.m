@@ -27,18 +27,8 @@
 //------------------------------------------------------------------------------
 static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * sender, IOHIDValueRef newValue)
 {
-	if (result != kIOReturnSuccess)
-	{
-		HIDLog(@"HIDDeviceInputValueCallback(): result from caller was %d", result);
-		return;
-	}
-	
 	HIDDevice *device = (__bridge HIDDevice *)context;
-	HIDElement *element = nil;		// Could be nil if it hasn't been created.
-	if ((element = [device elementForValueRef:newValue]))
-	{
-		[element didUpdateValue:newValue];
-	}
+	[device handleInputValue:newValue result:result];
 }
 
 
@@ -124,6 +114,27 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 			\tManufacturer: %@ \n \
 			\tIOHIDDeviceRef: %p \n \
 	}", self, self.product, self.manufacturer, self.device];
+}
+
+
+//------------------------------------------------------------------------------
+#pragma mark Handling Input
+//------------------------------------------------------------------------------
+- (void)handleInputValue:(IOHIDValueRef)valueRef result:(IOReturn)result
+{
+	if (result != kIOReturnSuccess)
+	{
+		// TODO: We really should signal an error somehow.
+		HIDLog(@"HIDDeviceInputValueCallback(): result from caller was %d", result);
+		return;
+	}
+	
+	
+	HIDElement *element = nil;
+	if ((element = [self elementForValueRef:valueRef]))
+	{
+		[element didUpdateValue:valueRef];
+	}
 }
 
 
