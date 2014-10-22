@@ -120,6 +120,8 @@
 {
 	const uint8_t * bytePtr = IOHIDValueGetBytePtr(_value);
 	
+	// Apparently this is a null-terminated array. What's weird is even if it's
+	// empty, we still get something 2 bytes long.
 	if (bytePtr)
 	{
 		NSUInteger length = IOHIDValueGetLength(_value);
