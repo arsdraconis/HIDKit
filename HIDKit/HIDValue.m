@@ -111,16 +111,24 @@
 //------------------------------------------------------------------------------
 #pragma mark Properties
 //------------------------------------------------------------------------------
-@dynamic bytes;
-- (const void *)bytes
+@dynamic byteValue;
+- (NSData *)byteValue
 {
-	return IOHIDValueGetBytePtr(_value);
+	const uint8_t * bytePtr = IOHIDValueGetBytePtr(_value);
+	
+	if (bytePtr)
+	{
+		NSUInteger length = IOHIDValueGetLength(_value);
+		return [NSData dataWithBytes:bytePtr length:length];
+	}
+	
+	return nil;
 }
 
-@dynamic length;
-- (NSUInteger)length
+@dynamic integerValue;
+- (NSInteger)integerValue
 {
-	return (NSUInteger)IOHIDValueGetLength(_value);
+	return (NSInteger)IOHIDValueGetIntegerValue(_value);
 }
 
 @dynamic timeStamp;

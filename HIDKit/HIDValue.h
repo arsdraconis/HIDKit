@@ -64,10 +64,11 @@
 /// The HIDElement associated with this value.
 @property (readonly) HIDElement *element;
 
-/// A pointer to the raw byte data contained in the object.
-@property (readonly, nonatomic) const void * bytes;
-/// The length of the raw byte data contained in the object.
-@property (readonly, nonatomic) NSUInteger length;
+/// An NSData instance containing the byte data in the object.
+@property (readonly, nonatomic) NSData* byteValue;
+
+/// The integer value contained in the object.
+@property (readonly, nonatomic) NSInteger integerValue;
 
 /// The timestamp given to the object at the time of its creation.
 @property (readonly, nonatomic) uint64_t timeStamp;
