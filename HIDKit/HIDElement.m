@@ -11,6 +11,7 @@
 #import "HIDElement+Private.h"
 #import "HIDDevice+Private.h"
 #import "HIDValue.h"
+#import "HIDValue+Private.h"
 
 //extern void HIDDeviceInputValueCallback(void * context, IOReturn result, void * sender, IOHIDValueRef newValue);
 
@@ -143,10 +144,13 @@
 //------------------------------------------------------------------------------
 #pragma mark Signaling Value Changes
 //------------------------------------------------------------------------------
-- (void)setInitialValue
+- (void)readValue
 {
-//	IOHIDValueRef initialValue = NULL;
-//	IOReturn success = IOHIDDeviceGetValueWithCallback(_device.device, _element, &initialValue, mach_absolute_time(), &HIDDeviceInputValueCallback, NULL);
+	IOHIDValueRef value = NULL;
+//	IOReturn success = IOHIDDeviceGetValueWithCallback(_device.device, _element, &value, mach_absolute_time(), &HIDDeviceInputValueCallback, NULL);
+	IOReturn success = IOHIDDeviceGetValue(_device.device, _element, &value);
+	HIDValue *newValue = [[HIDValue alloc] initWithValue:value element:self];
+	[self didUpdateValue:newValue];
 }
 
 - (void)didUpdateValue:(HIDValue *)value

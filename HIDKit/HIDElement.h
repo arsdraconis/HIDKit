@@ -41,4 +41,6 @@
 /// The current value of the element.
 @property (readonly) HIDValue *value;
 
+- (void)readValue;
+
 @end
