@@ -62,7 +62,7 @@
 - (instancetype)initWithInteger:(NSInteger)value element:(HIDElement *)element;
 
 /// The HIDElement associated with this value.
-@property (readonly) HIDElement *element;
+@property (readonly, weak) HIDElement *element;
 
 /// An NSData instance containing the byte data in the object.
 @property (readonly, nonatomic) NSData* byteValue;
