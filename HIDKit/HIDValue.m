@@ -81,19 +81,21 @@
 	return self;
 }
 
-- (instancetype)initWithValue:(IOHIDValueRef)value
+- (instancetype)initWithValue:(IOHIDValueRef)value element:(HIDElement *)element
 {
 	self = [super init];
 	if (self)
 	{
 		NSParameterAssert(value);
-		
-		_value = value;
+		NSParameterAssert(element);
 		
 		if (CFGetTypeID(value) != IOHIDValueGetTypeID() )
 		{
 			return nil;
 		}
+		
+		_value = value;
+		_element = element;
 	}
 	return self;
 }
