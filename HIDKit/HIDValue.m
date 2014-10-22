@@ -96,6 +96,8 @@
 		
 		_value = value;
 		_element = element;
+		
+		CFRetain(_value);
 	}
 	return self;
 }
