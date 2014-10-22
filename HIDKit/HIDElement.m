@@ -10,6 +10,7 @@
 #import "HIDElement+ElementProperties.h"
 #import "HIDElement+Private.h"
 #import "HIDDevice+Private.h"
+#import "HIDValue.h"
 
 //extern void HIDDeviceInputValueCallback(void * context, IOReturn result, void * sender, IOHIDValueRef newValue);
 
@@ -148,25 +149,9 @@
 //	IOReturn success = IOHIDDeviceGetValueWithCallback(_device.device, _element, &initialValue, mach_absolute_time(), &HIDDeviceInputValueCallback, NULL);
 }
 
-- (void)didUpdateValue:(IOHIDValueRef)valueRef
+- (void)didUpdateValue:(HIDValue *)value
 {
-	// TODO: Implement me!
-//	NSLog(@"Method unimplemented: %s in %s, line %d.", __PRETTY_FUNCTION__, __FILE__, __LINE__);
-	CFIndex length = IOHIDValueGetLength(valueRef);
-	if (length > 8)
-	{
-//		HIDLog(@"** Ignoring input value longer than 8 bytes in length. ** \n \
-			   \t Length: %ld \n \
-			   \t Cookie: 0x%0X", length, self.cookie);
-		
-		NSData *valueData = [NSData dataWithBytesNoCopy:(void *)IOHIDValueGetBytePtr(valueRef)
-												 length:length
-										   freeWhenDone:NO];
-		HIDLog(@"%@", valueData);
-		return;
-	}
-	
-	self.integerValue = (NSInteger)IOHIDValueGetIntegerValue(valueRef);
+	self.value = value;
 }
 
 @end

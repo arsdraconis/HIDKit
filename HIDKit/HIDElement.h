@@ -26,9 +26,6 @@
  */
 - (instancetype)initWithElementRef:(IOHIDElementRef)element onDevice:(HIDDevice *)device parent:(HIDElement *)parentElement NS_DESIGNATED_INITIALIZER;
 
-/// The current value of the element, expressed as an integer.
-@property (readonly) NSInteger integerValue;
-
 /// The device to which this element belongs to.
 @property (readonly, weak) HIDDevice *device;
 /// The parent element of this element.
