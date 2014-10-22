@@ -12,6 +12,8 @@
 #import "HIDElement.h"
 #import "HIDElement+ElementProperties.h"
 #import "HIDElement+Private.h"
+#import "HIDValue.h"
+#import "HIDValue+Private.h"
 
 
 #define IS_INPUT_ELEMENT(x) x.type == kIOHIDElementTypeInput_Misc	|| \
@@ -133,7 +135,8 @@ static void HIDDeviceInputValueCallback(void * context, IOReturn result, void * 
 	HIDElement *element = nil;
 	if ((element = [self elementForValueRef:valueRef]))
 	{
-		[element didUpdateValue:valueRef];
+		HIDValue *value = [[HIDValue alloc] initWithValue:valueRef element:element];
+		[element didUpdateValue:value];
 	}
 }
 
