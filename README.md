@@ -1,6 +1,13 @@
 HIDKit
 ======
 
+## Archival Notice
+I'm no longer maintaining this project and have archived the repo. Grab a copy now if you want it, as I may remove it at some point in the future. Feel free to use it for whatever you see fit.
+
+---
+
+## Overview
+
 An Objective-C wrapper around OS X's HID Manager API.
 
 Currently, this is a work in progress and the code is untested. There is no license, although I'm
